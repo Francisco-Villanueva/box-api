@@ -4,12 +4,12 @@
 
 <div align="center">
   <a href="#">
-    <img src="./api/assets/Isotipo.png" alt="First Plug" width="300">
+    <img src="./api/assets/Isotipo.png" alt="Box Delivery App" width="300">
   </a>
 
   <p align="center">
-    <h3 align="center">FIRST PLUG</h3>
-    <a href="https://github.com/RafaMojica/First-Plug-Platform-Client"><strong>See the frontend repository - Client »</strong></a>
+    <h3 align="center">Box Delivery - APP</h3>
+    <a href="https://github.com/BrianBts/coworkers-client"><strong>See the frontend repository - Client »</strong></a>
   </p>
 </div>
 
