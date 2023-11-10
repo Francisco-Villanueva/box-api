@@ -4,7 +4,7 @@
 
 <div align="center">
   <a href="#">
-    <img src="./api/assets/Isotipo.png" alt="Box Delivery App" width="300">
+    <img src="./api/assets/boxlogo.png" alt="Box Delivery App" width="300">
   </a>
 
   <p align="center">
