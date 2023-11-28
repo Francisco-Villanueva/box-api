@@ -1,32 +1,29 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { HydratedDocument } from 'mongoose'
 
 //TODO: chequear las condiciones de los campos
-export type PackageDocument = HydratedDocument<Package>;
+export type PackageDocument = HydratedDocument<Package>
 
 @Schema()
 export class Package {
-  @Prop({ required: true})
-  address: string;
-  
-  @Prop({ required: true})
-  clientName: string;
-  
-  @Prop({ required: true})
-  weight: number;
+	@Prop({ required: true })
+	address: string
 
-  // TODO cambiar el type a Date.
-  @Prop({ required: true})
-  deliverDate: string;
+	@Prop({ required: true })
+	clientName: string
 
-  @Prop({ required: true, default: "unassigned" })
-  status: string;
+	@Prop({ required: true })
+	weight: number
 
+	// TODO cambiar el type a Date.
+	@Prop({ required: true })
+	deliverDate: string
 
+	@Prop({ required: true, default: 'unassigned' })
+	status: string
 }
 
-export const PackageSchema = SchemaFactory.createForClass(Package);
-
+export const PackageSchema = SchemaFactory.createForClass(Package)
 
 /*
 Formato JSON del fakeData para packages en Client: 
