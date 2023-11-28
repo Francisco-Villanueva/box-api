@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { checkEnvVariables } from 'config/envCheck'
-
-const morgan = require('morgan')
+import * as morgan from 'morgan'
 
 async function bootstrap() {
 	await checkEnvVariables()
