@@ -6,11 +6,13 @@ import { UsersModule } from './users/users.module';
 import { PackagesModule } from './packages/packages.module';
 import { AuthModule } from './auth/auth.module';
 
-import * as dotenv from 'dotenv';
 
-dotenv.config();
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 @Module({
+
   imports: [
     MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule,
@@ -19,5 +21,6 @@ dotenv.config();
   ],
   controllers: [AppController],
   providers: [AppService],
+
 })
 export class AppModule {}
