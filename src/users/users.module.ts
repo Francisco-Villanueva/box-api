@@ -10,7 +10,7 @@ import {User, UserSchema} from './schema/users.schema'
       {
         name: User.name,
         schema: UserSchema
-        
+
       }
     ])
   ],

@@ -8,8 +8,8 @@ export class CreateUserDto {
 
     //POR EJEMPLO, DECLARAMOS LOS CAMPOS QUE POSEE EL SCHEMA USER;
 
-    //@IsNotEmpty() //valida que no este vacio
-    //name: string;
+    // @IsNotEmpty() 
+    // name: string;
 
 
 }

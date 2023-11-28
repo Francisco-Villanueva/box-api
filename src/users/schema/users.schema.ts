@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
+// Cuando este creado, se importa aca
+//import { Package } from './product.schema'; 
+
 //TODO: chequear las condiciones de los campos
 export type UsersDocument = HydratedDocument<User>;
 
@@ -26,6 +29,10 @@ export class User {
 
   @Prop({required: true, default: "HABILITADO"})
   status: string
+
+  //Acá se hace la relacion de User y Package, descomentar esta linea e importar el modelo cuando este creado.
+  // @Prop({type: [{type: "ObjectId", ref: "Package"}]})
+  // package: Package[]
 
 }
 
