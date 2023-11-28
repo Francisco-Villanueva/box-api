@@ -11,9 +11,9 @@ import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
-//TODO: todas las rutas que usen localhost:3000/users/ van a llegar a este controller
-//Esto se crea con npx nest g controller <name>
-@Controller('users')
+//Esto se crea con npx nest g controller <name> 
+@Controller('users') 
+
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
