@@ -3,7 +3,8 @@ import { LoginAuthDto } from './dto/login-auth.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { User, UsersDocument } from 'src/users/schema/users.schema'
 import { Model } from 'mongoose'
-import { compare } from 'bcrypt'
+import { compare, hash } from 'bcrypt'
+import { RegisterAuthDto } from './dto/register-auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -25,5 +26,10 @@ export class AuthService {
 		return data
 	}
 
-	//Agregar logica de register
+	async register(userObjectRegister: RegisterAuthDto) {
+		const { password } = userObjectRegister
+		const hashPassword = await hash(password, 8)
+		userObjectRegister = { ...userObjectRegister, password: hashPassword }
+		return this.userModel.create(userObjectRegister)
+	}
 }
