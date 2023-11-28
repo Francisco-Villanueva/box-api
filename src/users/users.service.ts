@@ -1,19 +1,23 @@
 import { Injectable } from '@nestjs/common'
-import { CreateUserDto } from './dto/create-user.dto'
+import * as bcrypt from 'bcrypt'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { User, UsersDocument } from './schema/users.schema'
+import { UserDTO } from './dto/user.dto'
+import { UsersModule } from './users.module'
 
 @Injectable()
 export class UsersService {
 	constructor(
-		@InjectModel(User.name) private UserModule: Model<UsersDocument>
+		@InjectModel(User.name)
+		private UserModule: Model<UsersDocument>
 	) {}
 
-	async create(createUserDto: CreateUserDto) {
-		// TODO: DTO createUserDto ---> BODY, esto trae la data
-		const userCreated = await this.UserModule.create(createUserDto)
+	async create(body: UserDTO): Promise<UsersModule> {
+		// Hasheo de la password para ingresalra a la db encriptada.
+		body.password = await bcrypt.hash(body.password, +process.env.HASH_SALT)
+		const userCreated = await this.UserModule.create(body)
 		return userCreated
 	}
 
@@ -31,5 +35,14 @@ export class UsersService {
 
 	remove(id: number) {
 		return `This action removes a #${id} user`
+	}
+	public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
+		try {
+			const user: UsersModule = await this.UserModule.findOne({
+				where: { [key]: value },
+			})
+
+			return user
+		} catch (error) {}
 	}
 }

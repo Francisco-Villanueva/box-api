@@ -1,26 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { LoginAuthDto } from './dto/login-auth.dto';
-import { RegisterAuthDto } from './dto/register-auth.dto';
+import { Injectable } from '@nestjs/common'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class AuthService {
-  create(loginAuthDto: LoginAuthDto) {
-    return 'This action adds a new auth';
-  }
+	constructor(private readonly userService: UsersService) {}
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+	public async validateUser(userName: string, password: string) {
+		const userByUsername = await this.userService.findBy({
+			key: 'userName',
+			value: userName,
+		})
+		const userByEmial = await this.userService.findBy({
+			key: 'email',
+			value: userName,
+		})
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+		console.log({ userByEmial, userByUsername })
 
-  update(id: number, registerAuthDto: RegisterAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+		// if (userByUsername) {
+		// 	const match = await bcrypt.compare(password, userByUsername)
+		// 	if (match) return userByUsername
+		// }
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
+		// if (userByEmial) {
+		// 	const match = await bcrypt.compare(password, userByEmial.password)
+		// 	if (match) return userByEmial
+		// }
+	}
 }

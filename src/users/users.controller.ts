@@ -11,15 +11,14 @@ import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
-//Esto se crea con npx nest g controller <name> 
-@Controller('users') 
-
+//Esto se crea con npx nest g controller <name>
+@Controller('users')
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
 	@Post()
 	create(@Body() createUserDto: CreateUserDto) {
-		return this.usersService.create(createUserDto)
+		// return this.usersService.create(createUserDto)
 	}
 
 	@Get()

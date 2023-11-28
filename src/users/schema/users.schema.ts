@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
+import { CARRIER_STATUS } from 'src/constants/carrierStatus'
 
 // Cuando este creado, se importa aca
 //import { Package } from './product.schema';
@@ -14,6 +15,9 @@ export class User {
 
 	@Prop({ required: true })
 	lastName: string
+
+	@Prop({ required: true })
+	userName: string
 
 	@Prop({
 		unique: true,
@@ -31,7 +35,11 @@ export class User {
 	@Prop({ required: true, default: 'CARRIER' })
 	role: string
 
-	@Prop({ required: true, default: 'HABILITADO' })
+	@Prop({
+		required: true,
+		enum: CARRIER_STATUS,
+		default: CARRIER_STATUS.DESHABILITADO,
+	})
 	status: string
 
 	//Acá se hace la relacion de User y Package, descomentar esta linea e importar el modelo cuando este creado.
