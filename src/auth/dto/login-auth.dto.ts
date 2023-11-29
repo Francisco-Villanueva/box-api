@@ -1,13 +1,12 @@
-import { IsEmail, MinLength, IsString } from 'class-validator'
-
-export class LoginAuthDto {
+import { IsNotEmpty, IsString } from 'class-validator'
+import { AuthBody } from '../../interfaces/auth.interface'
+export class LoginAuthDto implements AuthBody {
+	@IsNotEmpty()
 	@IsString()
-	usuario: string
+	userName: string
 
-	@IsEmail()
-	email: string
-
-	@MinLength(4)
+	@IsNotEmpty()
+	@IsString()
 	password: string
 }
 
@@ -22,3 +21,11 @@ export class LoginAuthDto {
 
 //     @MinLength(4, { message: 'La contraseña debe tener al menos 4 caracteres' })
 //     password: string;
+// 	@IsNotEmpty()
+// 	@IsString()
+// 	userName: string
+
+// 	@IsNotEmpty()
+// 	@IsString()
+// 	password: string
+// }
