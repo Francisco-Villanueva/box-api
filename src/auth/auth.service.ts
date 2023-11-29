@@ -1,9 +1,10 @@
+
 import { UsersService } from 'src/users/users.service'
 import { Injectable } from '@nestjs/common'
 import { UsersDocument } from 'src/users/schema/users.schema'
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
-import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
+
 
 @Injectable()
 export class AuthService {
@@ -44,6 +45,7 @@ export class AuthService {
 		return jwt.sign(payload, secret, { expiresIn: expires })
 	}
 
+
 	public async generateJWT(user: UsersDocument): Promise<AuthResponse> {
 		const getUser = await this.userService.findById(user._id.toString())
 
@@ -60,5 +62,11 @@ export class AuthService {
 			}),
 			user,
 		}
+	async register(userObjectRegister: RegisterAuthDto) {
+		const { password } = userObjectRegister
+		const hashPassword = await hash(password, 8)
+		userObjectRegister = { ...userObjectRegister, password: hashPassword }
+		return this.userModel.create(userObjectRegister)
+
 	}
 }

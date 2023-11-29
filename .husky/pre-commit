@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# npx lint-staged
-# npm run format
-# git add .
-# npm run build
+
+npm run lint
+npm run format
+git add .
+npm run build
