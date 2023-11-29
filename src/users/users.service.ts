@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+
 import * as bcrypt from 'bcrypt'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
@@ -22,11 +24,11 @@ export class UsersService {
 	}
 
 	findAll() {
-		return 'This action returns all users'
+		return this.UserModule.find()
 	}
 
-	findOne(id: number) {
-		return `This action returns a #${id} user`
+	public async findById(id: string) {
+		return await this.UserModule.findById(id)
 	}
 
 	update(id: number, updateUserDto: UpdateUserDto) {
@@ -40,8 +42,8 @@ export class UsersService {
 	}
 	public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
 		try {
-			const user: UsersModule = await this.UserModule.findOne({
-				where: { [key]: value },
+			const user: UsersDocument = await this.UserModule.findOne().where({
+				[key]: value,
 			})
 
 			return user

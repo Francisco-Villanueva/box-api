@@ -1,6 +1,4 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
-import { CARRIER_STATUS } from 'src/constants/carrierStatus'
-import { ROLES } from 'src/constants/roles'
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class UserDTO {
 	@IsNotEmpty()
@@ -27,11 +25,13 @@ export class UserDTO {
 	@IsString()
 	password: string
 
-	@IsNotEmpty()
-	@IsEnum(ROLES)
-	role: ROLES
+	// ESTO NO VIENE EN EL BODY, SE SETEA POR DEFAULT CUANDO SE CREA EL USER (default: carrier)
+	// @IsNotEmpty()
+	// @IsEnum(ROLES)
+	// role: ROLES
 
-	@IsNotEmpty()
-	@IsEnum(CARRIER_STATUS)
-	status: CARRIER_STATUS
+	// ESTO NO VIENE EN EL BODY, SE SETEA POR DEFAULT CUANDO SE CREA EL USER (default: HABILITADO)
+	// @IsNotEmpty()
+	// @IsEnum(CARRIER_STATUS)
+	// status: CARRIER_STATUS
 }

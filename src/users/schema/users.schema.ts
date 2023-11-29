@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Exclude } from 'class-transformer'
 import { HydratedDocument } from 'mongoose'
 import { CARRIER_STATUS } from 'src/constants/carrierStatus'
 
@@ -32,13 +33,13 @@ export class User {
 	@Prop({ required: true })
 	password: string
 
-	@Prop({ required: true, default: 'CARRIER' })
+	@Prop({ required: false, default: 'CARRIER' })
 	role: string
 
 	@Prop({
-		required: true,
+		required: false,
 		enum: CARRIER_STATUS,
-		default: CARRIER_STATUS.DESHABILITADO,
+		default: CARRIER_STATUS.HABILITADO,
 	})
 	status: string
 
