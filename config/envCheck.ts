@@ -6,7 +6,7 @@ export const checkEnvVariables = () => {
 		'PORT',
 		'SECRET_PASSWORD',
 		'MONGO_URI',
-
+		'HASH_SALT',
 		'CLIENT_HOST',
 	]
 

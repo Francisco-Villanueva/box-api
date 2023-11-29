@@ -1,7 +1,7 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto } from './dto/login-auth.dto'
-import { RegisterAuthDto } from './dto/register-auth.dto'
+import { UserDTO } from 'src/users/dto/user.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +21,7 @@ export class AuthController {
 	}
 
 	@Post('register')
-	registerUser(@Body() userObjectRegister: RegisterAuthDto) {
+	registerUser(@Body() userObjectRegister: UserDTO) {
 		return this.authService.register(userObjectRegister)
 	}
 }

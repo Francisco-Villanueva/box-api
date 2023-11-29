@@ -1,7 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
-
-import * as bcrypt from 'bcrypt'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
@@ -18,7 +15,6 @@ export class UsersService {
 
 	async create(body: UserDTO): Promise<UsersModule> {
 		// Hasheo de la password para ingresalra a la db encriptada.
-		body.password = await bcrypt.hash(body.password, +process.env.HASH_SALT)
 		const userCreated = await this.UserModule.create(body)
 		return userCreated
 	}
