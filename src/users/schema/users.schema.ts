@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Exclude } from 'class-transformer'
 import { HydratedDocument } from 'mongoose'
 import { CARRIER_STATUS } from 'src/constants/carrierStatus'
 
@@ -17,7 +16,10 @@ export class User {
 	@Prop({ required: true })
 	lastName: string
 
-	@Prop({ required: true })
+	@Prop({
+		required: true,
+		unique: true,
+	})
 	userName: string
 
 	@Prop({
