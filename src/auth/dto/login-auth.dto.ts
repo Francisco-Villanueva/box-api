@@ -3,7 +3,7 @@ import { AuthBody } from '../../interfaces/auth.interface'
 export class LoginAuthDto implements AuthBody {
 	@IsNotEmpty()
 	@IsString()
-	userName: string
+	user: string
 
 	@IsNotEmpty()
 	@IsString()
