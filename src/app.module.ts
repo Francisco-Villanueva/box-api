@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { UsersModule } from './users/users.module'
 import { PackagesModule } from './packages/packages.module'
 import { AuthModule } from './auth/auth.module'
+import { MailModule } from 'modules/mailer/mailer.module'
 
 import * as dotenv from 'dotenv'
 
@@ -16,6 +17,7 @@ dotenv.config()
 		UsersModule,
 		PackagesModule,
 		AuthModule,
+		MailModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

@@ -8,6 +8,8 @@ export const checkEnvVariables = () => {
 		'MONGO_URI',
 		'HASH_SALT',
 		'CLIENT_HOST',
+		'EMAIL_ADMIN',
+		'PASS_ADMIN',
 	]
 
 	const missingVariables: string[] = []
