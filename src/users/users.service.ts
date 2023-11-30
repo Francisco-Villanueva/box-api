@@ -27,6 +27,10 @@ export class UsersService {
 		return await this.UserModule.findById(id)
 	}
 
+	public async findByEmail(email: string) {
+		return await this.UserModule.findOne({ email })
+	}
+
 	update(id: number, updateUserDto: UpdateUserDto) {
 		console.log(updateUserDto)
 

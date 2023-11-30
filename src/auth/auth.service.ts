@@ -1,15 +1,20 @@
 import { UsersService } from 'src/users/users.service'
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { UsersDocument } from 'src/users/schema/users.schema'
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
 import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
 
 import { UserDTO } from 'src/users/dto/user.dto'
+import { ResetPasswordDto } from './dto/resetPass-auth.dto'
+import { MailService } from '../../modules/mailer/mailer.service'
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly userService: UsersService) {}
+	constructor(
+		private readonly userService: UsersService,
+		private readonly mailerService: MailService
+	) {}
 
 	public async validateUser(userName: string, password: string) {
 		const userByUsername = await this.userService.findBy({
@@ -69,5 +74,20 @@ export class AuthService {
 		const hashPassword = await bcrypt.hash(password, +process.env.HASH_SALT)
 		userObjectRegister = { ...userObjectRegister, password: hashPassword }
 		return this.userService.create(userObjectRegister)
+	}
+
+	async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
+		const { email } = resetPasswordDto
+		const user = await this.userService.findByEmail(email)
+
+		if (!user) {
+			throw new UnauthorizedException('Email no encontrado')
+		}
+
+		console.log('user ---> ', user)
+		const resetToken = await this.generateJWT(user)
+		console.log('resetToken ---> ', resetToken)
+
+		await this.mailerService.sendEmail(user.email, resetToken)
 	}
 }
