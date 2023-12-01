@@ -37,6 +37,14 @@ export class UsersService {
 		return `This action updates a #${id} user`
 	}
 
+	public async updatePassword(id: string, password: string) {
+		return await this.UserModule.findByIdAndUpdate(
+			id,
+			{ password },
+			{ new: true }
+		)
+	}
+
 	remove(id: number) {
 		return `This action removes a #${id} user`
 	}
