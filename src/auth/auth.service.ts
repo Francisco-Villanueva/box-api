@@ -8,6 +8,7 @@ import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
 import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { MailService } from '../../modules/mailer/mailer.service'
+import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -76,7 +77,7 @@ export class AuthService {
 		return this.userService.create(userObjectRegister)
 	}
 
-	async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
+	async resetPassword(resetPasswordDto: ResetPasswordDto) {
 		const { email } = resetPasswordDto
 		const user = await this.userService.findByEmail(email)
 
@@ -89,5 +90,30 @@ export class AuthService {
 		console.log('resetToken ---> ', resetToken)
 
 		await this.mailerService.sendEmail(user.email, resetToken)
+	}
+
+	async updatePassword(updatePasswordDto: UpdatePasswordDto) {
+		const { password, resetToken } = updatePasswordDto
+
+		// Verifica y valida el token:
+		const decoded = jwt.verify(resetToken, process.env.SECRET_PASSWORD)
+
+		if (!decoded) {
+			throw new UnauthorizedException('Token invalido')
+		}
+
+		// Busca el usuario a partir del token verificado:
+		const userId = decoded.sub.toString()
+		const user = await this.userService.findById(userId)
+
+		if (!user) {
+			throw new UnauthorizedException('Usuario no encontrado')
+		}
+
+		// Encriptar la nueva contraseña:
+		const hashPassword = await bcrypt.hash(password, +process.env.HASH_SALT)
+
+		// Actualizar usuario con nueva contraseña:
+		await this.userService.updatePassword(userId, hashPassword)
 	}
 }
