@@ -7,5 +7,7 @@ declare namespace NodeJS {
 		CLIENT_HOST: number
 		SECRET_PASSWORD: string
 		HASH_SALT: number
+		EMAIL_ADMIN: string
+		PASS_ADMIN: number
 	}
 }

@@ -10,6 +10,7 @@ import { LoginAuthDto } from './dto/login-auth.dto'
 import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
+import { ValidateTokenDTO } from './dto/token.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -31,6 +32,11 @@ export class AuthController {
 	@Post('register')
 	registerUser(@Body() userObjectRegister: UserDTO) {
 		return this.authService.register(userObjectRegister)
+	}
+
+	@Post('me')
+	me(@Body() token: ValidateTokenDTO) {
+		return this.authService.me(token.token)
 	}
 
 	@Post('reset-password')
