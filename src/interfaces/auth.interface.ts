@@ -2,7 +2,14 @@ import { ROLES } from 'src/constants/roles'
 import { UsersDocument } from 'src/users/schema/users.schema'
 
 export interface PayloadToken {
-	sub: string
+	_id: string
+	name: string
+	email: string
+	lastName: string
+	role: string
+	status: string
+	userName: string
+	image: string
 }
 
 export interface AuthBody {

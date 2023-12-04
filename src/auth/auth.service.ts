@@ -4,7 +4,6 @@ import { UsersDocument } from 'src/users/schema/users.schema'
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
 import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
-
 import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { MailService } from '../modules/mailer/mailer.service'
@@ -43,33 +42,45 @@ export class AuthService {
 	public signJWT({
 		payload,
 		secret,
-		expires,
 	}: {
 		payload: jwt.JwtPayload
 		secret: string
-		expires: number | string
 	}): string {
-		return jwt.sign(payload, secret, { expiresIn: expires })
+		return jwt.sign(payload, secret, { noTimestamp: true })
 	}
 
 	public async generateJWT(user: UsersDocument): Promise<AuthResponse> {
 		const getUser = await this.userService.findById(user._id.toString())
 
 		const payload: PayloadToken = {
-			sub: getUser._id.toString(),
+			_id: getUser._id.toString(),
+			name: getUser.name,
+			email: getUser.email,
+			lastName: getUser.lastName,
+			role: getUser.role,
+			status: getUser.status,
+			image: getUser.image,
+			userName: getUser.userName,
 		}
 
-		//TODO: En este return hay que excluir la password dentro de user.
 		return {
 			accessToken: this.signJWT({
 				payload,
 				secret: process.env.SECRET_PASSWORD,
-				expires: '1h',
 			}),
 			user,
 		}
 	}
 
+	public async me(token: string) {
+		const payload = jwt.verify(token, process.env.SECRET_PASSWORD)
+
+		if (!payload) {
+			throw new UnauthorizedException('Token invalido')
+		}
+
+		return payload
+	}
 	async register(userObjectRegister: UserDTO) {
 		const { password } = userObjectRegister
 		const hashPassword = await bcrypt.hash(password, +process.env.HASH_SALT)
