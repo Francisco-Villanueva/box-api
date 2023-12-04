@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { UsersModule } from './users/users.module'
 import { PackagesModule } from './packages/packages.module'
 import { AuthModule } from './auth/auth.module'
-import { MailModule } from 'modules/mailer/mailer.module'
+import { MailModule } from 'src/modules/mailer/mailer.module'
 
 import * as dotenv from 'dotenv'
 

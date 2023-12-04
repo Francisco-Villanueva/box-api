@@ -7,7 +7,7 @@ import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
 
 import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
-import { MailService } from '../../modules/mailer/mailer.service'
+import { MailService } from '../modules/mailer/mailer.service'
 import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
 
 @Injectable()
@@ -85,10 +85,7 @@ export class AuthService {
 			throw new UnauthorizedException('Email no encontrado')
 		}
 
-		console.log('user ---> ', user)
 		const resetToken = await this.generateJWT(user)
-		console.log('resetToken ---> ', resetToken)
-
 		await this.mailerService.sendEmail(user.email, resetToken)
 	}
 
@@ -96,14 +93,14 @@ export class AuthService {
 		const { password, resetToken } = updatePasswordDto
 
 		// Verifica y valida el token:
-		const decoded = jwt.verify(resetToken, process.env.SECRET_PASSWORD)
+		const payload = jwt.verify(resetToken, process.env.SECRET_PASSWORD)
 
-		if (!decoded) {
+		if (!payload) {
 			throw new UnauthorizedException('Token invalido')
 		}
 
 		// Busca el usuario a partir del token verificado:
-		const userId = decoded.sub.toString()
+		const userId = payload.sub.toString()
 		const user = await this.userService.findById(userId)
 
 		if (!user) {
