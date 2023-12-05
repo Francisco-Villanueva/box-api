@@ -31,10 +31,8 @@ export class UsersService {
 		return await this.UserModule.findOne({ email })
 	}
 
-	update(id: number, updateUserDto: UpdateUserDto) {
-		console.log(updateUserDto)
-
-		return `This action updates a #${id} user`
+	update(id: string, updateUserDto: UpdateUserDto) {
+		return this.UserModule.findByIdAndUpdate(id, updateUserDto, { new: true })
 	}
 
 	public async updatePassword(id: string, password: string) {
