@@ -1,5 +1,5 @@
 import { ROLES } from 'src/constants/roles'
-import { IUser } from 'src/interfaces/user.interface'
+import { IUser } from 'src/users/user.interface'
 import { Column, Entity } from 'typeorm'
 @Entity({ name: 'users' })
 export class UsersEntity implements IUser {

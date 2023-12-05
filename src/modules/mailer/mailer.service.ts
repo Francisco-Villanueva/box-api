@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { MailerService } from '@nestjs-modules/mailer'
-import { AuthResponse } from 'src/interfaces/auth.interface'
+import { IAuthResponse } from 'src/auth/auth.interface'
 
 @Injectable()
 export class MailService {
 	constructor(private readonly mailerService: MailerService) {}
 
-	public async sendEmail(to: string, resetToken: AuthResponse) {
+	public async sendEmail(to: string, resetToken: IAuthResponse) {
 		const resetLink = `${process.env.CLIENT_HOST}/reset-password/${resetToken.accessToken}`
 		console.log('resetLink --> ', resetLink)
 
