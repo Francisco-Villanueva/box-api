@@ -104,14 +104,17 @@ export class AuthService {
 		const { password, resetToken } = updatePasswordDto
 
 		// Verifica y valida el token:
-		const payload = jwt.verify(resetToken, process.env.SECRET_PASSWORD)
+		const payload = jwt.verify(
+			resetToken,
+			process.env.SECRET_PASSWORD
+		) as jwt.JwtPayload
 
 		if (!payload) {
 			throw new UnauthorizedException('Token invalido')
 		}
 
 		// Busca el usuario a partir del token verificado:
-		const userId = payload.sub.toString()
+		const userId = payload._id.toString()
 		const user = await this.userService.findById(userId)
 
 		if (!user) {
