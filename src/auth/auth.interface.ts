@@ -1,7 +1,7 @@
 import { ROLES } from 'src/constants/roles'
 import { UsersDocument } from 'src/users/schema/users.schema'
 
-export interface PayloadToken {
+export interface IPayloadToken {
 	_id: string
 	name: string
 	email: string
@@ -12,17 +12,17 @@ export interface PayloadToken {
 	image: string
 }
 
-export interface AuthBody {
+export interface IAuthBody {
 	user: string
 	password: string
 }
 
-export interface AuthResponse {
+export interface IAuthResponse {
 	accessToken: string
 	user: UsersDocument
 }
 
-export interface AuthTokenResult {
+export interface IAuthTokenResult {
 	role: (typeof ROLES)[keyof typeof ROLES]
 
 	sub: string
