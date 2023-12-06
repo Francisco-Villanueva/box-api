@@ -14,24 +14,26 @@ export class UsersService {
 	) {}
 
 	async create(body: UserDTO): Promise<UsersModule> {
-		// Hasheo de la password para ingresalra a la db encriptada.
 		const userCreated = await this.UserModule.create(body)
 		return userCreated
 	}
 
-	findAll() {
-		return this.UserModule.find()
+	async findAll() {
+		return await this.UserModule.find().populate('packages')
+	}
+	async findCarriers() {
+		return await this.UserModule.find({ role: 'CARRIER' }).populate('packages')
 	}
 
-	public async findById(id: string) {
-		return await this.UserModule.findById(id)
+	public async findById(id: string): Promise<UsersDocument> {
+		return await this.UserModule.findById(id).populate('packages')
 	}
 
 	public async findByEmail(email: string) {
 		return await this.UserModule.findOne({ email })
 	}
 
-	update(id: string, updateUserDto: UpdateUserDto) {
+	async update(id: string, updateUserDto: UpdateUserDto) {
 		return this.UserModule.findByIdAndUpdate(id, updateUserDto, { new: true })
 	}
 
@@ -42,7 +44,13 @@ export class UsersService {
 			{ new: true }
 		)
 	}
-
+	async addPackageToUser(userId: string, packageId: string): Promise<User> {
+		return this.UserModule.findByIdAndUpdate(
+			userId,
+			{ $push: { packages: packageId } },
+			{ new: true }
+		).exec()
+	}
 	remove(id: number) {
 		return `This action removes a #${id} user`
 	}

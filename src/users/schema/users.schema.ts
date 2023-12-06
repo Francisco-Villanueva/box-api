@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
 import { CARRIER_STATUS } from 'src/constants/carrierStatus'
-
+import { Package } from 'src/packages/schema/packages.schema'
+import * as mongoose from 'mongoose'
 // Cuando este creado, se importa aca
 //import { Package } from './product.schema';
 
@@ -46,8 +47,8 @@ export class User {
 	status: string
 
 	//Acá se hace la relacion de User y Package, descomentar esta linea e importar el modelo cuando este creado.
-	// @Prop({type: [{type: "ObjectId", ref: "Package"}]})
-	// package: Package[]
+	@Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Package' }])
+	packages: Package[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
