@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator'
-import { AuthBody } from '../../interfaces/auth.interface'
-export class LoginAuthDto implements AuthBody {
+import { IAuthBody } from '../auth.interface'
+export class LoginAuthDto implements IAuthBody {
 	@IsNotEmpty()
 	@IsString()
 	user: string

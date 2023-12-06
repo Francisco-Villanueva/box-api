@@ -1,7 +1,7 @@
 //NodeJS.ProcessEnv
 
 declare namespace NodeJS {
-	interface ProcessEnv {
+	interface IProcessEnv {
 		PORT: number
 		MONGO_URI: string
 		CLIENT_HOST: number

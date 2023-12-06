@@ -3,7 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { UsersDocument } from 'src/users/schema/users.schema'
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
-import { AuthResponse, PayloadToken } from 'src/interfaces/auth.interface'
+import { IAuthResponse, IPayloadToken } from 'src/auth/auth.interface'
 import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { MailService } from '../modules/mailer/mailer.service'
@@ -49,10 +49,10 @@ export class AuthService {
 		return jwt.sign(payload, secret, { noTimestamp: true })
 	}
 
-	public async generateJWT(user: UsersDocument): Promise<AuthResponse> {
+	public async generateJWT(user: UsersDocument): Promise<IAuthResponse> {
 		const getUser = await this.userService.findById(user._id.toString())
 
-		const payload: PayloadToken = {
+		const payload: IPayloadToken = {
 			_id: getUser._id.toString(),
 			name: getUser.name,
 			email: getUser.email,
@@ -104,14 +104,17 @@ export class AuthService {
 		const { password, resetToken } = updatePasswordDto
 
 		// Verifica y valida el token:
-		const payload = jwt.verify(resetToken, process.env.SECRET_PASSWORD)
+		const payload = jwt.verify(
+			resetToken,
+			process.env.SECRET_PASSWORD
+		) as jwt.JwtPayload
 
 		if (!payload) {
 			throw new UnauthorizedException('Token invalido')
 		}
 
 		// Busca el usuario a partir del token verificado:
-		const userId = payload.sub.toString()
+		const userId = payload._id.toString()
 		const user = await this.userService.findById(userId)
 
 		if (!user) {

@@ -33,8 +33,8 @@ export class UsersService {
 		return await this.UserModule.findOne({ email })
 	}
 
-	async update(_id: string, data: UpdateUserDto) {
-		return await this.UserModule.findOneAndUpdate({ _id }, data)
+	async update(id: string, updateUserDto: UpdateUserDto) {
+		return this.UserModule.findByIdAndUpdate(id, updateUserDto, { new: true })
 	}
 
 	public async updatePassword(id: string, password: string) {
