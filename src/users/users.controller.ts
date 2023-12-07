@@ -49,18 +49,8 @@ export class UsersController {
 	@Post('/add-package')
 	async addPackage(@Body() { packageId, userId }: AddPackageDto) {
 		const pack = await this.pacakgesServices.findByID(packageId)
-
-		const updatedPackage = await this.pacakgesServices.update(
-			pack._id.toString(),
-			{
-				address: pack.address,
-				clientName: pack.clientName,
-				deliverDate: pack.deliverDate,
-				weight: pack.weight,
-				status: 'PENDIENTE',
-			}
-		)
-		console.log('updatedPackage--->', updatedPackage)
+		pack.status = 'PENDIENTE'
+		pack.save()
 
 		return this.usersService.addPackageToUser(userId, pack._id.toString())
 	}
