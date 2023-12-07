@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common'
 import { PackagesService } from './packages.service'
 import { PackageDto } from './dto/package.dto'
+import { UpdatePackageDto } from './dto/update-package.dto'
 
 @Controller('packages')
 export class PackagesController {
@@ -20,7 +21,7 @@ export class PackagesController {
 		return this.packageService.create(createPackageDto)
 	}
 	@Put(':id')
-	update(@Param('id') id: string, @Body() data: PackageDto) {
+	update(@Param('id') id: string, @Body() data: UpdatePackageDto) {
 		return this.packageService.update(id, data)
 	}
 }
