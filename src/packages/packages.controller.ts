@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common'
 import { PackagesService } from './packages.service'
 import { PackageDto } from './dto/package.dto'
 import { UpdatePackageDto } from './dto/update-package.dto'
+import { PackageStatus } from './constants'
 
 @Controller('packages')
 export class PackagesController {
@@ -14,6 +15,10 @@ export class PackagesController {
 	@Get(':id')
 	findBy(@Param('id') id: string) {
 		return this.packageService.findByID(id)
+	}
+	@Get('/status/:status')
+	findByStatus(@Param('status') status: PackageStatus) {
+		return this.packageService.findByStatus(status)
 	}
 
 	@Post()
