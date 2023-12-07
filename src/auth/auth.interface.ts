@@ -1,4 +1,5 @@
 import { ROLES } from 'src/constants/roles'
+import { Package } from 'src/packages/schema/packages.schema'
 import { UsersDocument } from 'src/users/schema/users.schema'
 
 export interface IPayloadToken {
@@ -10,6 +11,7 @@ export interface IPayloadToken {
 	status: string
 	userName: string
 	image: string
+	packages: Package[]
 }
 
 export interface IAuthBody {

@@ -61,6 +61,7 @@ export class AuthService {
 			status: getUser.status,
 			image: getUser.image,
 			userName: getUser.userName,
+			packages: getUser.packages,
 		}
 
 		return {
