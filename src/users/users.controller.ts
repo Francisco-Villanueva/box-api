@@ -49,6 +49,8 @@ export class UsersController {
 	@Post('/add-package')
 	async addPackage(@Body() { packageId, userId }: AddPackageDto) {
 		const pack = await this.pacakgesServices.findByID(packageId)
+		pack.status = 'PENDIENTE'
+		pack.save()
 
 		return this.usersService.addPackageToUser(userId, pack._id.toString())
 	}
