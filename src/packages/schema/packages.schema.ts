@@ -19,7 +19,7 @@ export class Package {
 	@Prop({ required: true })
 	deliverDate: string
 
-	@Prop({ required: false, default: 'unassigned' })
+	@Prop({ required: false, default: 'NO ASIGNADO' })
 	status: string
 }
 
