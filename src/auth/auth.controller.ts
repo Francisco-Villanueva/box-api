@@ -4,6 +4,8 @@ import {
 	Body,
 	UnauthorizedException,
 	Patch,
+	UploadedFile,
+	UseInterceptors,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto } from './dto/login-auth.dto'
@@ -11,6 +13,7 @@ import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
 import { ValidateTokenDTO } from './dto/token.dto'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 @Controller('auth')
 export class AuthController {
@@ -47,5 +50,13 @@ export class AuthController {
 	@Patch('update-password')
 	updatePassword(@Body() updatePasswordDto: UpdatePasswordDto) {
 		return this.authService.updatePassword(updatePasswordDto)
+	}
+
+	//Endpoint para mandar la imagen desde el front. Le retorna al front la url de S3
+	@Post('upload-image')
+	@UseInterceptors(FileInterceptor('image'))
+	async uploadImage(@UploadedFile() file: Express.Multer.File) {
+		const imageUrl = await this.authService.uploadImageToS3(file)
+		return { imageUrl }
 	}
 }
