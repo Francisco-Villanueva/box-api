@@ -8,6 +8,7 @@ import { UserDTO } from 'src/users/dto/user.dto'
 import { ResetPasswordDto } from './dto/resetPass-auth.dto'
 import { MailService } from '../modules/mailer/mailer.service'
 import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
+import * as AWS from 'aws-sdk'
 
 @Injectable()
 export class AuthService {
@@ -127,5 +128,31 @@ export class AuthService {
 
 		// Actualizar usuario con nueva contraseña:
 		await this.userService.updatePassword(userId, hashPassword)
+	}
+
+	//Servicio que sube la imagen a S3 de AWS
+	async uploadImageToS3(file: Express.Multer.File): Promise<string> {
+		AWS.config.update({
+			accessKeyId: process.env.AWS_ACCESS_KEY,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+			region: process.env.AWS_REGION,
+		})
+
+		const s3 = new AWS.S3()
+		const bucket = process.env.AWS_BUCKET
+
+		if (!bucket) {
+			throw new Error('Variable de entorno AWS_BUCKET no está definida.')
+		}
+
+		const params = {
+			Bucket: bucket,
+			Key: `images/${file.originalname}`,
+			Body: file.buffer,
+			ContentType: file.mimetype,
+		}
+
+		const result = await s3.upload(params).promise()
+		return result.Location
 	}
 }

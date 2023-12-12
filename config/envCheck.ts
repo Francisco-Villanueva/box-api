@@ -10,6 +10,10 @@ export const checkEnvVariables = () => {
 		'CLIENT_HOST',
 		'EMAIL_ADMIN',
 		'PASS_ADMIN',
+		'AWS_ACCESS_KEY',
+		'AWS_SECRET_ACCESS_KEY',
+		'AWS_REGION',
+		'AWS_BUCKET',
 	]
 
 	const missingVariables: string[] = []
