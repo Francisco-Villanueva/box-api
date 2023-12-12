@@ -1,7 +1,7 @@
 export const PACAKGE_STATUSES = [
 	'PENDIENTE',
 	'EN CURSO',
-	'unassigned',
+	'NO ASIGNADO',
 	'ENTREGADO',
 ]
 export type PackageStatus = (typeof PACAKGE_STATUSES)[number]
