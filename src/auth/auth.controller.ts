@@ -6,6 +6,7 @@ import {
 	Patch,
 	UploadedFile,
 	UseInterceptors,
+	Get,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto } from './dto/login-auth.dto'
@@ -18,6 +19,11 @@ import { FileInterceptor } from '@nestjs/platform-express'
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
+
+	@Get()
+	sayHello() {
+		return 'Hello Packages'
+	}
 
 	@Post('login')
 	async login(@Body() { user, password }: LoginAuthDto) {

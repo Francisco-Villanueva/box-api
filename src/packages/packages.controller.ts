@@ -9,6 +9,11 @@ export class PackagesController {
 	constructor(private packageService: PackagesService) {}
 
 	@Get()
+	sayHello() {
+		return 'Hello Packages'
+	}
+
+	@Get()
 	findAll() {
 		return this.packageService.findAll()
 	}
