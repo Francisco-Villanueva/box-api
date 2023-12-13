@@ -1,6 +1,5 @@
 import { ROLES } from 'src/constants/roles'
 import { Package } from 'src/packages/schema/packages.schema'
-import { UsersDocument } from 'src/users/schema/users.schema'
 
 export interface IPayloadToken {
 	_id: string
@@ -21,7 +20,7 @@ export interface IAuthBody {
 
 export interface IAuthResponse {
 	accessToken: string
-	user: UsersDocument
+	user: IPayloadToken
 }
 
 export interface IAuthTokenResult {
