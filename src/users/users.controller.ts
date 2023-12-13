@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common'
+import {
+	Controller,
+	Get,
+	Post,
+	Body,
+	Param,
+	Delete,
+	Put,
+	NotFoundException,
+} from '@nestjs/common'
 import { UsersService } from './users.service'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserDTO } from './dto/user.dto'
@@ -46,12 +55,17 @@ export class UsersController {
 			throw error
 		}
 	}
-	@Post('/add-package')
-	async addPackage(@Body() { packageId, userId }: AddPackageDto) {
+	@Post('/:userId/package')
+	async addPackage(
+		@Param('userId') userId: string,
+		@Body() { packageId }: AddPackageDto
+	) {
 		const pack = await this.pacakgesServices.findByID(packageId)
+		if (!pack) {
+			throw new NotFoundException('Package not found')
+		}
 		pack.status = 'PENDIENTE'
 		pack.save()
-
 		return this.usersService.addPackageToUser(userId, pack._id.toString())
 	}
 	@Delete(':id')
