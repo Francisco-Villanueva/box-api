@@ -70,7 +70,7 @@ export class AuthService {
 				payload,
 				secret: process.env.SECRET_PASSWORD,
 			}),
-			user,
+			user: payload,
 		}
 	}
 
