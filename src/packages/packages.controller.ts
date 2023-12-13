@@ -8,7 +8,7 @@ import { PackageStatus } from './constants'
 export class PackagesController {
 	constructor(private packageService: PackagesService) {}
 
-	@Get()
+	@Get('/test')
 	sayHello() {
 		return 'Hello Packages'
 	}
