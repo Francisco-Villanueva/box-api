@@ -22,6 +22,11 @@ export class UsersController {
 		private readonly pacakgesServices: PackagesService
 	) {}
 
+	// @Get()
+	// getHello(): string {
+	// 	return 'Hello, NestJS!'
+	// }
+
 	@Post()
 	create(@Body() body: UserDTO) {
 		return this.usersService.create(body)
