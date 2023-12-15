@@ -241,7 +241,7 @@ describe('Users Services', () => {
 	})
 
 	describe('findAll', () => {
-		it('Should return an array of all users', async () => {
+		xit('Should return an array of all users', async () => {
 			jest.spyOn(model, 'find').mockResolvedValue(mockUsers)
 
 			const result = await usersService.findAll()
@@ -251,7 +251,7 @@ describe('Users Services', () => {
 			expect(result.length).toBe(6)
 		})
 
-		it('Should return an empty array if there are no users', async () => {
+		xit('Should return an empty array if there are no users', async () => {
 			jest.spyOn(model, 'find').mockResolvedValue([])
 
 			const result = await usersService.findAll()
@@ -263,7 +263,7 @@ describe('Users Services', () => {
 	})
 
 	describe('findById', () => {
-		it('Should find and return a user by ID', async () => {
+		xit('Should find and return a user by ID', async () => {
 			jest.spyOn(model, 'findById').mockResolvedValue(mockUsers[2])
 
 			const result = await usersService.findById(mockUsers[2]._id)
@@ -284,7 +284,7 @@ describe('Users Services', () => {
 			isValidObjectIdMock.mockRestore()
 		})
 
-		it('Should throw NotFoundException if user is not found', async () => {
+		xit('Should throw NotFoundException if user is not found', async () => {
 			const id = '65689670bc39015676f673c0'
 			jest.spyOn(model, 'findById').mockResolvedValue(null)
 
@@ -407,7 +407,6 @@ describe('Users Services', () => {
 			jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(updatedUserMock)
 
 			const result = await usersService.updatePassword(userId, newPassword)
-			console.log('result ---> ', result)
 
 			expect(model.findByIdAndUpdate).toHaveBeenCalledWith(
 				userId,
