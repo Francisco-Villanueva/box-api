@@ -1,5 +1,9 @@
 import { UsersService } from 'src/users/users.service'
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import {
+	ConflictException,
+	Injectable,
+	UnauthorizedException,
+} from '@nestjs/common'
 import { UsersDocument } from 'src/users/schema/users.schema'
 import * as jwt from 'jsonwebtoken'
 import * as bcrypt from 'bcrypt'
@@ -86,8 +90,14 @@ export class AuthService {
 	async register(userObjectRegister: UserDTO) {
 		const { password } = userObjectRegister
 		const hashPassword = await bcrypt.hash(password, +process.env.HASH_SALT)
-		userObjectRegister = { ...userObjectRegister, password: hashPassword }
-		return this.userService.create(userObjectRegister)
+		try {
+			userObjectRegister = { ...userObjectRegister, password: hashPassword }
+			return this.userService.create(userObjectRegister)
+		} catch (error) {
+			if (error?.code === 11000) {
+				throw new ConflictException('Duplicate email or username')
+			}
+		}
 	}
 
 	async resetPassword(resetPasswordDto: ResetPasswordDto) {
