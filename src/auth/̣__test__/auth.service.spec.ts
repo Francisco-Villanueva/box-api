@@ -26,8 +26,8 @@ describe('AuthService', () => {
 	}
 
 	const mockAuthService = {
-		findById: jest.fn(),
-		find: jest.fn(),
+		signJWT: jest.fn(),
+		register: jest.fn(),
 	}
 
 	beforeEach(async () => {
@@ -117,7 +117,7 @@ describe('AuthService', () => {
 				ConflictException
 			)
 		})
-		/* it('Should reject registration with a duplicate userName', async () => {
+		it('Should reject registration with a duplicate userName', async () => {
 			const duplicateEmail = {
 				name: 'New User',
 				lastName: 'New Example',
@@ -133,6 +133,6 @@ describe('AuthService', () => {
 			await expect(authService.register(duplicateEmail)).rejects.toBeInstanceOf(
 				ConflictException
 			)
-		}) */
+		})
 	})
 })
