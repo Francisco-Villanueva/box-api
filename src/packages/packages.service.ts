@@ -21,9 +21,13 @@ export class PackagesService {
 		return this.PackageModel.find()
 	}
 	async findByID(id: string) {
+		console.log('ID----->', id)
+
 		return this.PackageModel.findById(id)
 	}
 	async findByStatus(status: PackageStatus) {
+		console.log('status--->', status)
+
 		return this.PackageModel.find({ status })
 	}
 	async update(_id: string, data: UpdatePackageDto) {
