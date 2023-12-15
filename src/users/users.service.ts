@@ -1,7 +1,11 @@
-import { Injectable } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 import { User, UsersDocument } from './schema/users.schema'
 import { UserDTO } from './dto/user.dto'
 import { UsersModule } from './users.module'
@@ -19,18 +23,39 @@ export class UsersService {
 	}
 
 	async findAll() {
+		// return await this.UserModule.find()
 		return await this.UserModule.find().populate('packages')
 	}
+
 	async findCarriers() {
 		return await this.UserModule.find({ role: 'CARRIER' }).populate('packages')
 	}
 
 	public async findById(id: string): Promise<UsersDocument> {
-		return await this.UserModule.findById(id).populate('packages')
+		const isValidId = mongoose.isValidObjectId(id)
+
+		if (!isValidId) {
+			throw new BadRequestException('Please enter a correct id')
+		}
+
+		// const user = await this.UserModule.findById(id)
+		const user = await this.UserModule.findById(id).populate('packages')
+
+		if (!user) {
+			throw new NotFoundException('User not found')
+		}
+
+		return user
 	}
 
 	public async findByEmail(email: string) {
-		return await this.UserModule.findOne({ email })
+		const user = await this.UserModule.findOne({ email })
+
+		if (!user) {
+			throw new NotFoundException('User not found')
+		}
+
+		return user
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto) {
@@ -44,6 +69,7 @@ export class UsersService {
 			{ new: true }
 		)
 	}
+
 	async addPackageToUser(userId: string, packageId: string): Promise<User> {
 		return this.UserModule.findByIdAndUpdate(
 			userId,
@@ -51,9 +77,11 @@ export class UsersService {
 			{ new: true }
 		).exec()
 	}
+
 	remove(id: number) {
 		return `This action removes a #${id} user`
 	}
+
 	public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
 		try {
 			const user: UsersDocument = await this.UserModule.findOne().where({
