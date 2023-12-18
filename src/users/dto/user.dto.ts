@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { Package } from 'src/packages/schema/packages.schema'
 
 export class UserDTO {
 	@IsNotEmpty()
@@ -24,4 +25,16 @@ export class UserDTO {
 	@IsNotEmpty()
 	@IsString()
 	password: string
+
+	@IsOptional()
+	@IsString()
+	role?: string
+
+	@IsOptional()
+	@IsString()
+	status?: string
+
+	@IsOptional()
+	@IsArray()
+	packages?: Package[]
 }

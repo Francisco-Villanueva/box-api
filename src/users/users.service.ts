@@ -1,8 +1,4 @@
-import {
-	BadRequestException,
-	Injectable,
-	NotFoundException,
-} from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import mongoose, { Model } from 'mongoose'
@@ -31,35 +27,25 @@ export class UsersService {
 		return await this.UserModule.find({ role: 'CARRIER' }).populate('packages')
 	}
 
+	// Returns user by Id:
 	public async findById(id: string): Promise<UsersDocument> {
-		const isValidId = mongoose.isValidObjectId(id)
-
-		if (!isValidId) {
-			throw new BadRequestException('Please enter a correct id')
-		}
-
 		// const user = await this.UserModule.findById(id)
 		const user = await this.UserModule.findById(id).populate('packages')
-
-		if (!user) {
-			throw new NotFoundException('User not found')
-		}
-
 		return user
 	}
 
+	// Return user by email:
 	public async findByEmail(email: string) {
 		const user = await this.UserModule.findOne({ email })
-
-		if (!user) {
-			throw new NotFoundException('User not found')
-		}
-
 		return user
 	}
 
+	// Update a user by Id:
 	async update(id: string, updateUserDto: UpdateUserDto) {
-		return this.UserModule.findByIdAndUpdate(id, updateUserDto, { new: true })
+		const updatedUser = this.UserModule.findByIdAndUpdate(id, updateUserDto, {
+			new: true,
+		})
+		return updatedUser
 	}
 
 	public async updatePassword(id: string, password: string) {
@@ -78,8 +64,8 @@ export class UsersService {
 		).exec()
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} user`
+	async remove(id: string) {
+		return this.UserModule.findByIdAndDelete(id)
 	}
 
 	public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
@@ -90,5 +76,11 @@ export class UsersService {
 
 			return user
 		} catch (error) {}
+	}
+
+	// ObjectId validation:
+	async validateObjectId(id: string): Promise<boolean> {
+		const isValidId = mongoose.isValidObjectId(id)
+		return isValidId
 	}
 }
