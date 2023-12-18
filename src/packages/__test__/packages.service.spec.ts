@@ -2,11 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { PackagesService } from '../packages.service'
 import { getModelToken } from '@nestjs/mongoose'
 import { Package } from '../schema/packages.schema'
-import mongoose, { Model } from 'mongoose'
-import { BadRequestException, NotFoundException } from '@nestjs/common'
+import { Model } from 'mongoose'
 import { PackageDto } from '../dto/package.dto'
 
-describe('PackagesController', () => {
+describe('PackagesService', () => {
 	let packageService: PackagesService
 	let model: Model<Package>
 
@@ -76,29 +75,6 @@ describe('PackagesController', () => {
 			expect(model.findById).toHaveBeenCalledWith(mockPackageArr[2]._id)
 			expect(result).toEqual(mockPackageArr[2])
 		})
-
-		it('should return BadRequestException with an invalid id', async () => {
-			const id = 'invalid-id'
-			const isValidObjectIdMock = jest
-				.spyOn(mongoose, 'isValidObjectId')
-				//REVISAR PORQUE ACA VA TRUE
-				.mockReturnValue(false)
-
-			await expect(packageService.findByID(id)).rejects.toThrow(
-				BadRequestException
-			)
-			expect(isValidObjectIdMock).toHaveBeenCalledWith(id)
-			isValidObjectIdMock.mockRestore()
-		})
-
-		it('should return NotFoundException with an incorrect id', async () => {
-			const notFoundId = '6571e920c5cfa9c54f6149d7'
-			jest.spyOn(model, 'findById').mockResolvedValue(null)
-			await expect(packageService.findByID(notFoundId)).rejects.toThrow(
-				NotFoundException
-			)
-			expect(model.findById).toHaveBeenCalledWith(notFoundId)
-		})
 	})
 
 	describe('findByStatus', () => {
@@ -125,14 +101,6 @@ describe('PackagesController', () => {
 			expect(model.find).toHaveBeenCalledWith({ status: 'ENTREGADO' })
 			expect(deliveredPackages).toEqual([])
 			expect(deliveredPackages.length).toBe(0)
-		})
-
-		it('should return BadRequestException if the status doesnt exist', async () => {
-			const status = 'ESTADO FALSO'
-
-			await expect(packageService.findByStatus(status)).rejects.toThrow(
-				BadRequestException
-			)
 		})
 	})
 

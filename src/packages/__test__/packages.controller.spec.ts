@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { PackagesService } from '../packages.service'
 import { PackagesController } from '../packages.controller'
 import { PackageDto } from '../dto/package.dto'
+import mongoose from 'mongoose'
+import { BadRequestException, NotFoundException } from '@nestjs/common'
 
 describe('PackagesController', () => {
 	let packageService: PackagesService
@@ -48,6 +50,9 @@ describe('PackagesController', () => {
 		create: jest.fn(),
 		findByID: jest.fn().mockResolvedValueOnce(mockPackageObject),
 		update: jest.fn(),
+		findByStatus: jest
+			.fn()
+			.mockResolvedValueOnce([mockPackage[1], mockPackage[2]]),
 	}
 
 	beforeEach(async () => {
@@ -101,6 +106,49 @@ describe('PackagesController', () => {
 			const result = await packageController.findBy(mockPackageObject._id)
 			expect(packageService.findByID).toHaveBeenCalled()
 			expect(result).toEqual(mockPackageObject)
+		})
+
+		it('should return BadRequestException with an invalid id', async () => {
+			const id = 'invalid-id'
+			const isValidObjectIdMock = jest
+				.spyOn(mongoose, 'isValidObjectId')
+				.mockReturnValue(false)
+
+			await expect(packageController.findBy(id)).rejects.toThrow(
+				BadRequestException
+			)
+
+			expect(packageService.findByID).toHaveBeenCalled()
+
+			expect(isValidObjectIdMock).toHaveBeenCalledWith(id)
+			isValidObjectIdMock.mockRestore()
+		})
+
+		it('should return NotFoundException with an incorrect id', async () => {
+			const notFoundId = '6571e920c5cfa9c54f6149d7'
+			await expect(packageController.findBy(notFoundId)).rejects.toThrow(
+				NotFoundException
+			)
+			expect(packageService.findByID).toHaveBeenCalledWith(notFoundId)
+		})
+	})
+
+	describe('getPackageByStatus', () => {
+		it('should get a package by status', async () => {
+			const status = 'PENDIENTE'
+			const result = await packageController.findByStatus(status)
+			expect(packageService.findByStatus).toHaveBeenCalled()
+			expect(result).toEqual([mockPackage[1], mockPackage[2]])
+		})
+
+		it('should return BadRequestException with an invalid id', async () => {
+			const invlaidStatus = 'INVALID'
+
+			await expect(packageController.findByStatus(invlaidStatus)).rejects.toThrow(
+				BadRequestException
+			)
+
+			expect(packageService.findByStatus).toHaveBeenCalled()
 		})
 	})
 
