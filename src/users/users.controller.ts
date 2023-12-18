@@ -7,6 +7,7 @@ import {
 	Delete,
 	Put,
 	NotFoundException,
+	Patch,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { UpdateUserDto } from './dto/update-user.dto'
@@ -76,5 +77,13 @@ export class UsersController {
 	@Delete(':id')
 	remove(@Param('id') id: string) {
 		return this.usersService.remove(+id)
+	}
+
+	@Patch('/:userId/removepackage/:packageId')
+	async removePackage(
+		@Param('userId') userId: string,
+		@Param('packageId') packageId: string
+	) {
+		return this.usersService.removePackage(userId, packageId)
 	}
 }
