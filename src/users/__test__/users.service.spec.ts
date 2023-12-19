@@ -2,8 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UsersService } from '../users.service'
 import { getModelToken } from '@nestjs/mongoose'
 import { User } from '../schema/users.schema'
-import mongoose, { Model } from 'mongoose'
-import { BadRequestException, NotFoundException } from '@nestjs/common'
+import { Model } from 'mongoose'
 import { UserDTO } from '../dto/user.dto'
 
 describe('Users Services', () => {
@@ -272,7 +271,10 @@ describe('Users Services', () => {
 			expect(result).toEqual(mockUsers[2])
 		})
 
-		it('Should throw BadRequestException if invalid ID is provided', async () => {
+		/*
+		Migrate test to Controller:
+		
+		xit('Should throw BadRequestException if invalid ID is provided', async () => {
 			const id = 'invalid-id'
 			const isValidObjectIdMock = jest
 				.spyOn(mongoose, 'isValidObjectId')
@@ -292,6 +294,8 @@ describe('Users Services', () => {
 
 			expect(model.findById).toHaveBeenCalledWith(id)
 		})
+
+		*/
 	})
 
 	describe('findByEmail', () => {
@@ -308,7 +312,10 @@ describe('Users Services', () => {
 			expect(result).toEqual(validUserEmail)
 		})
 
-		it('Should throw NotFoundException if email is not found', async () => {
+		/*
+		Migrate test to Controller:
+		
+		xit('Should throw NotFoundException if email is not found', async () => {
 			const userEmail = 'wrongemail@gmail.com'
 			jest.spyOn(model, 'findOne').mockResolvedValue(null)
 
@@ -318,6 +325,8 @@ describe('Users Services', () => {
 
 			expect(model.findOne).toHaveBeenCalledWith({ email: userEmail })
 		})
+
+		*/
 	})
 
 	describe('create', () => {
