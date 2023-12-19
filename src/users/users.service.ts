@@ -82,6 +82,12 @@ export class UsersService {
 		return `This action removes a #${id} user`
 	}
 
+	public async removePackage(userId: string, packageId: string) {
+		const user = await this.UserModule.findById(userId)
+		user.packages = user.packages.filter((pack) => pack.toString() !== packageId)
+		user.save()
+	}
+
 	public async findBy({ key, value }: { key: keyof UserDTO; value: any }) {
 		try {
 			const user: UsersDocument = await this.UserModule.findOne().where({
