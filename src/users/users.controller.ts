@@ -17,8 +17,10 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { UserDTO } from './dto/user.dto'
 import { PackagesService } from 'src/packages/packages.service'
 import { AddPackageDto } from './dto/add-package.dto'
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 
 //Esto se crea con npx nest g controller <name>
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
 	constructor(
@@ -26,6 +28,8 @@ export class UsersController {
 		private readonly pacakgesServices: PackagesService
 	) {}
 
+	@ApiOperation({ description: 'Create a new user' })
+	@ApiBody({ type: UserDTO })
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
 	async create(@Body() body: UserDTO) {
@@ -41,6 +45,7 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({ description: 'List all users' })
 	@Get()
 	@HttpCode(HttpStatus.OK)
 	async findAll() {
@@ -51,6 +56,7 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({ description: 'List all users with role Carrier' })
 	@Get('/carriers')
 	@HttpCode(HttpStatus.OK)
 	async findCarriers() {
@@ -61,6 +67,8 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({ description: 'List a specific user based on their ID' })
+	@ApiParam({ name: 'id', description: 'ID of the user', type: String })
 	@Get(':id')
 	@HttpCode(HttpStatus.OK)
 	async findOne(@Param('id') id: string) {
@@ -85,6 +93,9 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({ description: 'Update a specific user based on their ID' })
+	@ApiBody({ type: UpdateUserDto })
+	@ApiParam({ name: 'id', description: 'ID of the user', type: String })
 	@Put(':id')
 	@HttpCode(HttpStatus.OK)
 	async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -128,6 +139,10 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({
+		description: 'List a specific user associated packages, based on their ID',
+	})
+	@ApiParam({ name: 'userId', description: 'ID of the user', type: String })
 	@Get('/:userId/packages')
 	@HttpCode(HttpStatus.OK)
 	async getPackages(@Param('userId') id: string) {
@@ -151,6 +166,11 @@ export class UsersController {
 		}
 	}
 
+	@ApiOperation({
+		description: 'Add a package to a specific user, based on their ID',
+	})
+	@ApiBody({ type: AddPackageDto })
+	@ApiParam({ name: 'userId', description: 'ID of the user', type: String })
 	@Post('/:userId/package')
 	@HttpCode(HttpStatus.OK)
 	async addPackage(
@@ -173,6 +193,8 @@ export class UsersController {
 		return this.usersService.addPackageToUser(userId, pack._id.toString())
 	}
 
+	@ApiOperation({ description: 'Delete a specific user based on their ID' })
+	@ApiParam({ name: 'id', description: 'ID of the user', type: String })
 	@Delete(':id')
 	@HttpCode(HttpStatus.OK)
 	async remove(@Param('id') id: string) {
@@ -186,6 +208,15 @@ export class UsersController {
 		return this.usersService.remove(id)
 	}
 
+	@ApiOperation({
+		description: 'Remove a specific package from a user, based on their ID',
+	})
+	@ApiParam({ name: 'userId', description: 'ID of the user', type: String })
+	@ApiParam({
+		name: 'packageId',
+		description: 'ID of the package',
+		type: String,
+	})
 	@Patch('/:userId/removepackage/:packageId')
 	async removePackage(
 		@Param('userId') userId: string,

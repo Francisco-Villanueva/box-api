@@ -15,11 +15,14 @@ import { PackageDto } from './dto/package.dto'
 import { UpdatePackageDto } from './dto/update-package.dto'
 import { PACAKGE_STATUSES, PackageStatus } from './constants'
 import mongoose from 'mongoose'
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Packages')
 @Controller('packages')
 export class PackagesController {
 	constructor(private packageService: PackagesService) {}
 
+	@ApiOperation({ description: 'List all users' })
 	@Get()
 	@HttpCode(HttpStatus.OK)
 	async findAll() {
@@ -30,6 +33,8 @@ export class PackagesController {
 		}
 	}
 
+	@ApiOperation({ description: 'List a specific package based on their ID' })
+	@ApiParam({ name: 'id', description: 'ID of the package', type: String })
 	@Get(':id')
 	@HttpCode(HttpStatus.OK)
 	async findBy(@Param('id') id: string) {
@@ -48,6 +53,12 @@ export class PackagesController {
 		}
 	}
 
+	@ApiOperation({ description: 'List all packages with a specific status' })
+	@ApiParam({
+		name: 'status',
+		description: 'Status of the package',
+		enum: PACAKGE_STATUSES,
+	})
 	@Get('/status/:status')
 	@HttpCode(HttpStatus.OK)
 	async findByStatus(@Param('status') status: PackageStatus) {
@@ -60,6 +71,8 @@ export class PackagesController {
 		}
 	}
 
+	@ApiOperation({ description: 'Create a new package' })
+	@ApiBody({ type: PackageDto })
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
 	async create(@Body() createPackageDto: PackageDto) {
@@ -70,6 +83,9 @@ export class PackagesController {
 		}
 	}
 
+	@ApiOperation({ description: 'Update a specific package based on their ID' })
+	@ApiBody({ type: UpdatePackageDto })
+	@ApiParam({ name: 'id', description: 'ID of the package', type: String })
 	@Put(':id')
 	@HttpCode(HttpStatus.CREATED)
 	async update(@Param('id') id: string, @Body() data: UpdatePackageDto) {
