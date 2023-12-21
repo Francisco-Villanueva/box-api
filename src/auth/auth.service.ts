@@ -26,7 +26,7 @@ export class AuthService {
 			key: 'userName',
 			value: userName,
 		})
-		const userByEmial = await this.userService.findBy({
+		const userByEmail = await this.userService.findBy({
 			key: 'email',
 			value: userName,
 		})
@@ -36,9 +36,9 @@ export class AuthService {
 			if (match) return userByUsername
 		}
 
-		if (userByEmial) {
-			const match = await bcrypt.compare(password, userByEmial.password)
-			if (match) return userByEmial
+		if (userByEmail) {
+			const match = await bcrypt.compare(password, userByEmail.password)
+			if (match) return userByEmail
 		}
 
 		return null
