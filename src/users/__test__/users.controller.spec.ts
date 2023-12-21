@@ -4,6 +4,7 @@ import { UsersController } from '../users.controller'
 import { PackagesService } from 'src/packages/packages.service'
 import { PackagesController } from 'src/packages/packages.controller'
 import { BadRequestException, NotFoundException } from '@nestjs/common'
+import { UserDTO } from '../dto/user.dto'
 
 describe('Users Controller', () => {
 	let usersService: UsersService
@@ -38,55 +39,6 @@ describe('Users Controller', () => {
 			image: 'https://boxappbucket.s3.sa-east-1.amazonaws.com/images/admin.jpg',
 		},
 		{
-			_id: '65689670bc39015676f673c4',
-			name: 'Agustin',
-			lastName: 'Torroja',
-			userName: 'atorroja1',
-			email: 'atorroja18@gmail.com',
-			password: '$2b$10$OqC2YGNH3hVWnjD3P4Ts7eKmGwMfBtVYyeE2yHW5GATpFcKjr.1P.',
-			role: 'CARRIER',
-			status: 'HABILITADO',
-			__v: 0,
-			packages: [
-				{
-					_id: '657899b280b34d8dcf61bc34',
-					address: 'Jeronimo Salguero 2085',
-					clientName: 'Agustin',
-					weight: 5.25,
-					deliverDate: '2023-12-12',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6578a992328c2adebf4b0aaf',
-					address: 'Avenida Monroe 1655, Buenos Aires, Argentina',
-					clientName: 'Juan',
-					weight: 5.25,
-					deliverDate: '2023-12-05',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6579c65b8ba290f7a6b3dfc3',
-					address: 'Avenida Casares 3450, Buenos Aires, Argentina',
-					clientName: 'Pepe',
-					weight: 10.5,
-					deliverDate: '2023-12-12',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6579c6b68ba290f7a6b3e004',
-					address: 'Avenida Sarmiento 2671, Buenos Aires, Argentina',
-					clientName: 'Pepe',
-					weight: 2.5,
-					deliverDate: '2023-12-20',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-			],
-		},
-		{
 			packages: [],
 			_id: '656f687fca92ea1424504f35',
 			name: 'Braian',
@@ -99,129 +51,18 @@ describe('Users Controller', () => {
 			status: 'HABILITADO',
 			__v: 0,
 		},
-		{
-			_id: '656f741a6b1da2a30cf2c4b6',
-			name: 'Dario',
-			lastName: 'Beratti',
-			userName: 'darioberatti',
-			email: 'darioberatti@gmail.com',
-			image: 'https://boxappbucket.s3.sa-east-1.amazonaws.com/images/dario.jpg',
-			password: '$2b$10$w/pNLEYazZLs.zB/Ev70f.pAC2xwB/omE9AV/Aa5mUlz/zlV3xCM2',
-			role: 'CARRIER',
-			status: 'HABILITADO',
-			__v: 0,
-			packages: [
-				{
-					_id: '6571eae2c5cfa9c54f6149fb',
-					address: 'Carlos Pellegrini 1450, Buenos Aires, Argentina',
-					clientName: 'Juliana Hernancez',
-					weight: 22,
-					deliverDate: '2023-12-07',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '65724a9ebca18abd39b41dc5',
-					address: 'Avenida Belgrano 2500, Buenos Aires, Argentina',
-					clientName: 'Carlos',
-					weight: 1.5,
-					deliverDate: '2023-12-07',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6572312fbca18abd39b41cf8',
-					address: 'Avenida Belgrano 1300, Buenos Aires, Argentina',
-					clientName: 'Carlos Gomez',
-					weight: 1.5,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-			],
-		},
-		{
-			_id: '6570c91995b30abad16d1c4c',
-			name: 'Mateo',
-			lastName: 'Navarro',
-			userName: 'Mateico',
-			email: 'mateo.navarro98@gmail.com',
-			password: '$2b$10$txms1PSwRKgtlCyhv5GctuN.MxJlhA1DUjLzbwQg4Ndfi7CcKrVWq',
-			role: 'CARRIER',
-			status: 'HABILITADO',
-			packages: [
-				{
-					_id: '6571cf4ffdb95b0a615c4aee',
-					address: 'Av. del Libertador 6700, Buenos Aires, Argentina',
-					clientName: 'Pedrito Lopesssss',
-					weight: 4,
-					deliverDate: '2013-12-7',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6564e7c7473dafad5c55c313',
-					address: 'Carlos Pellegrini 1163, Buenos Aires, Argentina',
-					clientName: 'Agustin Torroja',
-					weight: 5,
-					deliverDate: '2023-12-06',
-					status: 'EN CURSO',
-					__v: 0,
-				},
-				{
-					_id: '6571e4e9c5cfa9c54f614916',
-					address: 'Carlos Pellegrini 570, Buenos Aires, Argentina',
-					clientName: 'Franco Perez',
-					weight: 5,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-				{
-					_id: '6571e4fdc5cfa9c54f614918',
-					address: 'Carlos Pellegrini 1850, Buenos Aires, Argentina',
-					clientName: 'Ricardo Fernandez',
-					weight: 15,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-				{
-					_id: '6571e8efc5cfa9c54f6149a7',
-					address: 'Carlos Pellegrini 55, Buenos Aires, Argentina',
-					clientName: 'Dario Fernandez',
-					weight: 22,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-				{
-					_id: '6571e920c5cfa9c54f6149d6',
-					address: 'Carlos Pellegrini 255, Buenos Aires, Argentina',
-					clientName: 'Dario Perez',
-					weight: 22,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-				{
-					_id: '657218ac1addbf032a974968',
-					address: 'Av Rivadavia 255, Buenos Aires, Argentina',
-					clientName: 'Martin Ramirez',
-					weight: 15,
-					deliverDate: '2023-12-07',
-					status: 'PENDIENTE',
-					__v: 0,
-				},
-			],
-			__v: 0,
-		},
 	]
 
 	const mockUsersService = {
 		findAll: jest.fn().mockResolvedValueOnce(mockUsers),
 		findById: jest.fn().mockResolvedValueOnce(mockUsers[0]),
 		validateObjectId: jest.fn().mockResolvedValue(true),
+		create: jest.fn(),
+		update: jest.fn(),
+		findCarriers: jest
+			.fn()
+			.mockResolvedValue(mockUsers.filter((user) => user.role === 'CARRIER')),
+		remove: jest.fn(),
 	}
 	const mockPackagesService = {}
 
@@ -291,6 +132,176 @@ describe('Users Controller', () => {
 
 			expect(usersService.validateObjectId).toHaveBeenCalledWith(userId)
 			expect(usersService.findById).toHaveBeenCalledWith(userId)
+		})
+	})
+
+	describe('create', () => {
+		it('Should create and return a user', async () => {
+			const mockNewUser: UserDTO = {
+				name: 'John',
+				lastName: 'Doe',
+				userName: 'johndoe',
+				email: 'john.doe@example.com',
+				password: 'securepassword',
+				image: 'image',
+			}
+
+			const mockCreatedUser = {
+				__v: 0,
+				_id: '657c6eb63a3c5eed02880c66',
+				email: 'john.doe@example.com',
+				image: 'image',
+				lastName: 'Doe',
+				name: 'John',
+				packages: [],
+				password: 'securepassword',
+				role: 'CARRIER',
+				status: 'HABILITADO',
+				userName: 'johndoe',
+			}
+
+			jest.spyOn(mockUsersService, 'create').mockResolvedValueOnce(mockCreatedUser)
+
+			const result = await usersController.create(mockNewUser)
+
+			expect(usersService.create).toHaveBeenCalled()
+			expect(result).toEqual(mockCreatedUser)
+			expect(result).toBeDefined()
+		})
+
+		it('Should throw BadRequestException for missing required fields', async () => {
+			const mockNewUser: UserDTO = {
+				name: 'John',
+				lastName: '',
+				userName: '',
+				email: 'john.doe@example.com',
+				password: 'securepassword',
+				image: 'image',
+			}
+
+			await expect(usersController.create(mockNewUser)).rejects.toThrow(
+				BadRequestException
+			)
+		})
+	})
+
+	describe('update', () => {
+		it('Should update a user', async () => {
+			const userId = '656f687fca92ea1424504f35'
+
+			const updateUserDto = {
+				name: 'Brai',
+			}
+
+			const updatedUserMock = {
+				packages: [],
+				_id: '656f687fca92ea1424504f35',
+				name: 'Brai',
+				lastName: 'Barrientos',
+				userName: 'Braianbts',
+				email: 'braianbts@gmail.com',
+				image: '',
+				password: '$2b$10$AzMQ5FOAyHcFcF45JLuPaeJMiUoahrkWkSTEl1vJn/u1VIgQkbcre',
+				role: 'CARRIER',
+				status: 'HABILITADO',
+				__v: 0,
+			}
+
+			jest.spyOn(mockUsersService, 'update').mockResolvedValueOnce(updatedUserMock)
+
+			const result = await usersController.update(userId, updateUserDto)
+
+			expect(mockUsersService.validateObjectId).toHaveBeenCalledWith(userId)
+			expect(mockUsersService.update).toHaveBeenCalledWith(userId, updateUserDto)
+			expect(result).toEqual(updatedUserMock)
+		})
+
+		it('Should throw BadRequestException for invalid ObjectId', async () => {
+			const userId = 'invalidObjectId'
+			const updateUserDto = {
+				name: 'Brai',
+			}
+			mockUsersService.validateObjectId.mockResolvedValueOnce(false)
+
+			await expect(usersController.update(userId, updateUserDto)).rejects.toThrow(
+				BadRequestException
+			)
+
+			expect(usersService.validateObjectId).toHaveBeenCalledWith(userId)
+			expect(mockUsersService.validateObjectId).toHaveBeenCalledWith(userId)
+		})
+
+		it('Should throw NotFoundException if user not found', async () => {
+			const userId = '656f687fca92ea1424504f00'
+			const updateUserDto = {
+				name: 'Brai',
+			}
+			jest.spyOn(mockUsersService, 'update').mockResolvedValueOnce(null)
+
+			await expect(usersController.update(userId, updateUserDto)).rejects.toThrow(
+				NotFoundException
+			)
+
+			expect(mockUsersService.validateObjectId).toHaveBeenCalledWith(userId)
+			expect(mockUsersService.update).toHaveBeenCalledWith(userId, updateUserDto)
+		})
+
+		it('Should throw BadRequestException for missing update keys in UpdateUserDto', async () => {
+			const userId = '656f687fca92ea1424504f35'
+
+			const updateUserDto = {}
+
+			await expect(usersController.update(userId, updateUserDto)).rejects.toThrow(
+				BadRequestException
+			)
+			expect(mockUsersService.validateObjectId).toHaveBeenCalledWith(userId)
+		})
+	})
+
+	describe('findCarriers', () => {
+		it('Should get all users with role: carrier', async () => {
+			const result = await usersController.findCarriers()
+			const expectedCarriers = mockUsers.filter((user) => user.role === 'CARRIER')
+
+			expect(usersService.findCarriers).toHaveBeenCalled()
+			expect(result).toEqual(expectedCarriers)
+		})
+	})
+
+	describe('remove', () => {
+		it('Should delete a user by ID ', async () => {
+			const userId = '656726cb084a9990fd8b31ca'
+			const deletedUser = {
+				_id: '656726cb084a9990fd8b31ca',
+				name: 'Francisco',
+				lastName: 'Villanueva',
+				userName: 'panchov',
+				email: 'pancho@gmail.com',
+				password: '$2b$10$qdetHfSUYA4VqqBu36jchuAXwH3m/4mIinzynGkZfsKtJeXdw5.56',
+				role: 'CARRIER',
+				status: 'HABILITADO',
+				__v: 0,
+				packages: [],
+			}
+
+			jest.spyOn(mockUsersService, 'remove').mockResolvedValueOnce(deletedUser)
+
+			const result = await usersController.remove(userId)
+			expect(mockUsersService.remove).toHaveBeenCalledWith(userId)
+			expect(result).toEqual(deletedUser)
+		})
+
+		it('Should throw BadRequestException for invalid ObjectId', async () => {
+			const userId = 'invalidObjectId'
+
+			mockUsersService.validateObjectId.mockResolvedValueOnce(false)
+
+			await expect(usersController.remove(userId)).rejects.toThrow(
+				BadRequestException
+			)
+
+			expect(usersService.validateObjectId).toHaveBeenCalledWith(userId)
+			expect(mockUsersService.validateObjectId).toHaveBeenCalledWith(userId)
 		})
 	})
 })

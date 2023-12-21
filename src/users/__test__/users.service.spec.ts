@@ -270,32 +270,6 @@ describe('Users Services', () => {
 			expect(model.findById).toHaveBeenCalledWith(mockUsers[2]._id)
 			expect(result).toEqual(mockUsers[2])
 		})
-
-		/*
-		Migrate test to Controller:
-		
-		xit('Should throw BadRequestException if invalid ID is provided', async () => {
-			const id = 'invalid-id'
-			const isValidObjectIdMock = jest
-				.spyOn(mongoose, 'isValidObjectId')
-				.mockReturnValue(false)
-
-			await expect(usersService.findById(id)).rejects.toThrow(BadRequestException)
-
-			expect(isValidObjectIdMock).toHaveBeenCalledWith(id)
-			isValidObjectIdMock.mockRestore()
-		})
-
-		xit('Should throw NotFoundException if user is not found', async () => {
-			const id = '65689670bc39015676f673c0'
-			jest.spyOn(model, 'findById').mockResolvedValue(null)
-
-			await expect(usersService.findById(id)).rejects.toThrow(NotFoundException)
-
-			expect(model.findById).toHaveBeenCalledWith(id)
-		})
-
-		*/
 	})
 
 	describe('findByEmail', () => {
@@ -311,22 +285,6 @@ describe('Users Services', () => {
 			expect(result).toBeDefined()
 			expect(result).toEqual(validUserEmail)
 		})
-
-		/*
-		Migrate test to Controller:
-		
-		xit('Should throw NotFoundException if email is not found', async () => {
-			const userEmail = 'wrongemail@gmail.com'
-			jest.spyOn(model, 'findOne').mockResolvedValue(null)
-
-			await expect(usersService.findByEmail(userEmail)).rejects.toThrow(
-				NotFoundException
-			)
-
-			expect(model.findOne).toHaveBeenCalledWith({ email: userEmail })
-		})
-
-		*/
 	})
 
 	describe('create', () => {
