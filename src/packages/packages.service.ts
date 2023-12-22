@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Package, PackageDocument } from './schema/packages.schema'
-import { Model } from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 import { PackageDto } from './dto/package.dto'
 import { UpdatePackageDto } from './dto/update-package.dto'
 import { PackageStatus } from './constants'
@@ -32,5 +32,10 @@ export class PackagesService {
 		return await this.PackageModel.findOneAndUpdate({ _id }, data, {
 			returnOriginal: false,
 		})
+	}
+	// ObjectId validation:
+	async validateObjectId(id: string): Promise<boolean> {
+		const isValidId = mongoose.isValidObjectId(id)
+		return isValidId
 	}
 }
