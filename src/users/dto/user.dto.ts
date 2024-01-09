@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import {
+	IsArray,
+	IsDate,
+	IsNotEmpty,
+	IsOptional,
+	IsString,
+} from 'class-validator'
 import { Package } from 'src/packages/schema/packages.schema'
 
 export class UserDTO {
@@ -33,6 +39,10 @@ export class UserDTO {
 	@IsOptional()
 	@IsString()
 	status?: string
+
+	@IsOptional()
+	@IsDate()
+	rejectedDeclarationTime: Date
 
 	@IsOptional()
 	@IsArray()
