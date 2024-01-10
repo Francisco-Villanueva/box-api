@@ -46,6 +46,9 @@ export class User {
 	})
 	status: string
 
+	@Prop({ required: false, default: undefined })
+	rejectedDeclarationTime: Date
+
 	//Acá se hace la relacion de User y Package, descomentar esta linea e importar el modelo cuando este creado.
 	@Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Package' }])
 	packages: Package[]

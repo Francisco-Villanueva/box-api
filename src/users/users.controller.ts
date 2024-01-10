@@ -108,8 +108,17 @@ export class UsersController {
 			}
 
 			// Dto validation:
-			const { name, lastName, userName, email, password, role, status, packages } =
-				updateUserDto
+			const {
+				name,
+				lastName,
+				userName,
+				email,
+				password,
+				role,
+				status,
+				packages,
+				rejectedDeclarationTime,
+			} = updateUserDto
 
 			if (
 				!(
@@ -120,7 +129,8 @@ export class UsersController {
 					password ||
 					role ||
 					status ||
-					packages
+					packages ||
+					rejectedDeclarationTime
 				)
 			) {
 				throw new BadRequestException('Key for update not found on UserDto')

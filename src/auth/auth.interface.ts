@@ -10,6 +10,7 @@ export interface IPayloadToken {
 	status: string
 	userName: string
 	image: string
+	rejectedDeclarationTime: Date
 	packages: Package[]
 }
 

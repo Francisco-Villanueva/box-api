@@ -25,4 +25,7 @@ export class UsersEntity implements IUser {
 
 	@Column({ type: 'enum', enum: ROLES })
 	role: ROLES
+
+	@Column()
+	rejectedDeclarationTime: Date
 }

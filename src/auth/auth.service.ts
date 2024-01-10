@@ -66,6 +66,7 @@ export class AuthService {
 			status: getUser.status,
 			image: getUser.image,
 			userName: getUser.userName,
+			rejectedDeclarationTime: getUser.rejectedDeclarationTime,
 			packages: getUser.packages,
 		}
 
