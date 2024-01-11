@@ -144,6 +144,7 @@ describe('Users Controller', () => {
 				email: 'john.doe@example.com',
 				password: 'securepassword',
 				image: 'image',
+				rejectedDeclarationTime: undefined,
 			}
 
 			const mockCreatedUser = {
@@ -177,6 +178,7 @@ describe('Users Controller', () => {
 				email: 'john.doe@example.com',
 				password: 'securepassword',
 				image: 'image',
+				rejectedDeclarationTime: undefined,
 			}
 
 			await expect(usersController.create(mockNewUser)).rejects.toThrow(

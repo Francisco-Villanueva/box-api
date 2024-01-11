@@ -296,6 +296,7 @@ describe('Users Services', () => {
 				email: 'john.doe@example.com',
 				password: 'securepassword',
 				image: 'image',
+				rejectedDeclarationTime: undefined,
 			}
 
 			const mockCreatedUser = {
