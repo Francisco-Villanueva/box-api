@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { PackagesService } from '../packages.service'
 import { PackagesController } from '../packages.controller'
 import { PackageDto } from '../dto/package.dto'
-import mongoose from 'mongoose'
 import { BadRequestException, NotFoundException } from '@nestjs/common'
 
 describe('PackagesController', () => {
@@ -53,6 +52,7 @@ describe('PackagesController', () => {
 		findByStatus: jest
 			.fn()
 			.mockResolvedValueOnce([mockPackage[1], mockPackage[2]]),
+		validateObjectId: jest.fn().mockResolvedValue(true),
 	}
 
 	beforeEach(async () => {
@@ -104,24 +104,23 @@ describe('PackagesController', () => {
 	describe('getPackageById', () => {
 		it('should get a package by ID', async () => {
 			const result = await packageController.findBy(mockPackageObject._id)
-			expect(packageService.findByID).toHaveBeenCalled()
+
+			expect(packageService.validateObjectId).toHaveBeenCalledWith(
+				mockPackageObject._id
+			)
+			expect(packageService.findByID).toHaveBeenCalledWith(mockPackageObject._id)
 			expect(result).toEqual(mockPackageObject)
 		})
 
 		it('should return BadRequestException with an invalid id', async () => {
 			const id = 'invalid-id'
-			const isValidObjectIdMock = jest
-				.spyOn(mongoose, 'isValidObjectId')
-				.mockReturnValue(false)
+			mockPackageService.validateObjectId.mockResolvedValueOnce(false)
 
 			await expect(packageController.findBy(id)).rejects.toThrow(
 				BadRequestException
 			)
 
-			expect(packageService.findByID).toHaveBeenCalled()
-
-			expect(isValidObjectIdMock).toHaveBeenCalledWith(id)
-			isValidObjectIdMock.mockRestore()
+			expect(packageService.validateObjectId).toHaveBeenCalledWith(id)
 		})
 
 		it('should return NotFoundException with an incorrect id', async () => {
