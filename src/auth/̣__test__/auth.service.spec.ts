@@ -23,6 +23,7 @@ describe('AuthService', () => {
 		email: 'userexample@mail.com',
 		image: 'https://boxappbucket.s3.sa-east-1.amazonaws.com/images/admin2.jpg',
 		password: 'Password123',
+		rejectedDeclarationTime: undefined,
 	}
 
 	const mockAuthService = {
@@ -108,6 +109,7 @@ describe('AuthService', () => {
 				email: 'newuserexample@mail.com',
 				image: 'https://boxappbucket.s3.sa-east-1.amazonaws.com/images/admin2.jpg',
 				password: 'Password123',
+				rejectedDeclarationTime: undefined,
 			}
 			jest
 				.spyOn(usersService, 'create')
@@ -125,6 +127,7 @@ describe('AuthService', () => {
 				email: 'userexample@mail.com', //email repeated
 				image: 'https://boxappbucket.s3.sa-east-1.amazonaws.com/images/admin2.jpg',
 				password: 'Password123',
+				rejectedDeclarationTime: undefined,
 			}
 			jest
 				.spyOn(usersService, 'create')
