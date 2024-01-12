@@ -30,4 +30,4 @@ jobs:
      run: npm run test
    - run: |
        touch .env
-       echo "${{ secrets.PROD_ENV_FILE }" > .env
+       echo "${{ secrets.PROD_ENV_FILE }}" > .env
