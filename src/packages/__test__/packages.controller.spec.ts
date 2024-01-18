@@ -15,6 +15,8 @@ describe('PackagesController', () => {
 		weight: 5,
 		deliverDate: '2023-12-14',
 		status: 'NO ASIGNADO',
+		isShownToAdmin: true,
+		isShownToCarrier: true,
 	}
 
 	const mockPackage = [
@@ -25,6 +27,8 @@ describe('PackagesController', () => {
 			weight: 5,
 			deliverDate: '2023-12-14',
 			status: 'NO ASIGNADO',
+			isShownToAdmin: true,
+			isShownToCarrier: true,
 		},
 		{
 			_id: '2671e920c5cfa9c54f6149f0',
@@ -33,6 +37,8 @@ describe('PackagesController', () => {
 			weight: 2,
 			deliverDate: '2023-12-13',
 			status: 'PENDIENTE',
+			isShownToAdmin: true,
+			isShownToCarrier: true,
 		},
 		{
 			_id: '9071e920c5cfa9c54f6149p3',
@@ -41,6 +47,8 @@ describe('PackagesController', () => {
 			weight: 3,
 			deliverDate: '2023-12-13',
 			status: 'PENDIENTE',
+			isShownToAdmin: true,
+			isShownToCarrier: true,
 		},
 	]
 
@@ -91,6 +99,8 @@ describe('PackagesController', () => {
 				weight: 5,
 				deliverDate: '2023-12-14',
 				status: 'NO ASIGNADO',
+				isShownToAdmin: true,
+				isShownToCarrier: true,
 			}
 
 			mockPackageService.create = jest.fn().mockResolvedValueOnce(mockPackage[0])
