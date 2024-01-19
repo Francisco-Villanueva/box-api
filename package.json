@@ -8,10 +8,10 @@
 	"scripts": {
 		"build": "nest build",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-		"start": "nest start",
+		"start": "nest --max_old_space_size=2048 start",
 		"start:dev": "nest start --watch",
 		"start:debug": "nest start --debug --watch",
-		"start:prod": "node dist/main",
+		"start:prod": "node --max_old_space_size=2048 dist/src/main.js",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
 		"prepare": "husky install",
 		"test": "jest --verbose"
