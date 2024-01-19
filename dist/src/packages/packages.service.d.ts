@@ -22,82 +22,43 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Package, PackageDocument } from './schema/packages.schema'
-import mongoose, { Model } from 'mongoose'
-import { PackageDto } from './dto/package.dto'
-import { UpdatePackageDto } from './dto/update-package.dto'
-import { PackageStatus } from './constants'
-import { PackagesModule } from './packages.module'
+import { Package, PackageDocument } from './schema/packages.schema';
+import mongoose, { Model } from 'mongoose';
+import { PackageDto } from './dto/package.dto';
+import { UpdatePackageDto } from './dto/update-package.dto';
+import { PackageStatus } from './constants';
+import { PackagesModule } from './packages.module';
 export declare class PackagesService {
-	private PackageModel
-	constructor(PackageModel: Model<PackageDocument>)
-	create(data: PackageDto): Promise<PackagesModule>
-	findAll(): Promise<
-		(mongoose.Document<
-			unknown,
-			{},
-			mongoose.Document<unknown, {}, Package> &
-				Package & {
-					_id: mongoose.Types.ObjectId
-				}
-		> &
-			mongoose.Document<unknown, {}, Package> &
-			Package & {
-				_id: mongoose.Types.ObjectId
-			} & Required<{
-				_id: mongoose.Types.ObjectId
-			}>)[]
-	>
-	findByID(id: string): Promise<
-		mongoose.Document<
-			unknown,
-			{},
-			mongoose.Document<unknown, {}, Package> &
-				Package & {
-					_id: mongoose.Types.ObjectId
-				}
-		> &
-			mongoose.Document<unknown, {}, Package> &
-			Package & {
-				_id: mongoose.Types.ObjectId
-			} & Required<{
-				_id: mongoose.Types.ObjectId
-			}>
-	>
-	findByStatus(status: PackageStatus): Promise<
-		(mongoose.Document<
-			unknown,
-			{},
-			mongoose.Document<unknown, {}, Package> &
-				Package & {
-					_id: mongoose.Types.ObjectId
-				}
-		> &
-			mongoose.Document<unknown, {}, Package> &
-			Package & {
-				_id: mongoose.Types.ObjectId
-			} & Required<{
-				_id: mongoose.Types.ObjectId
-			}>)[]
-	>
-	update(
-		_id: string,
-		data: UpdatePackageDto
-	): Promise<
-		mongoose.Document<
-			unknown,
-			{},
-			mongoose.Document<unknown, {}, Package> &
-				Package & {
-					_id: mongoose.Types.ObjectId
-				}
-		> &
-			mongoose.Document<unknown, {}, Package> &
-			Package & {
-				_id: mongoose.Types.ObjectId
-			} & Required<{
-				_id: mongoose.Types.ObjectId
-			}>
-	>
-	validateObjectId(id: string): Promise<boolean>
+    private PackageModel;
+    constructor(PackageModel: Model<PackageDocument>);
+    create(data: PackageDto): Promise<PackagesModule>;
+    findAll(): Promise<(mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    }> & mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    } & Required<{
+        _id: mongoose.Types.ObjectId;
+    }>)[]>;
+    findByID(id: string): Promise<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    }> & mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    } & Required<{
+        _id: mongoose.Types.ObjectId;
+    }>>;
+    findByStatus(status: PackageStatus): Promise<(mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    }> & mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    } & Required<{
+        _id: mongoose.Types.ObjectId;
+    }>)[]>;
+    update(_id: string, data: UpdatePackageDto): Promise<mongoose.Document<unknown, {}, mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    }> & mongoose.Document<unknown, {}, Package> & Package & {
+        _id: mongoose.Types.ObjectId;
+    } & Required<{
+        _id: mongoose.Types.ObjectId;
+    }>>;
+    validateObjectId(id: string): Promise<boolean>;
 }

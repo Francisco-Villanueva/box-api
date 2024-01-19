@@ -1,10 +1,4 @@
-import {
-	IsString,
-	IsOptional,
-	IsNotEmpty,
-	IsNumber,
-	IsBoolean,
-} from 'class-validator'
+import { IsString, IsOptional, IsNotEmpty, IsNumber } from 'class-validator'
 
 export class PackageDto {
 	@IsString()
@@ -22,10 +16,4 @@ export class PackageDto {
 	@IsString()
 	@IsOptional()
 	status: string
-	@IsBoolean()
-	@IsOptional()
-	isShownToAdmin: boolean
-	@IsBoolean()
-	@IsOptional()
-	isShownToCarrier: boolean
 }

@@ -23,111 +23,40 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import { PackagesService } from './packages.service'
-import { PackageDto } from './dto/package.dto'
-import { UpdatePackageDto } from './dto/update-package.dto'
-import { PackageStatus } from './constants'
+import { PackagesService } from './packages.service';
+import { PackageDto } from './dto/package.dto';
+import { UpdatePackageDto } from './dto/update-package.dto';
+import { PackageStatus } from './constants';
 export declare class PackagesController {
-	private packageService
-	constructor(packageService: PackagesService)
-	findAll(): Promise<
-		(import('mongoose').Document<
-			unknown,
-			{},
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-				import('./schema/packages.schema').Package & {
-					_id: import('mongoose').Types.ObjectId
-				}
-		> &
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-			import('./schema/packages.schema').Package & {
-				_id: import('mongoose').Types.ObjectId
-			} & Required<{
-				_id: import('mongoose').Types.ObjectId
-			}>)[]
-	>
-	findBy(id: string): Promise<
-		import('mongoose').Document<
-			unknown,
-			{},
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-				import('./schema/packages.schema').Package & {
-					_id: import('mongoose').Types.ObjectId
-				}
-		> &
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-			import('./schema/packages.schema').Package & {
-				_id: import('mongoose').Types.ObjectId
-			} & Required<{
-				_id: import('mongoose').Types.ObjectId
-			}>
-	>
-	findByStatus(status: PackageStatus): Promise<
-		(import('mongoose').Document<
-			unknown,
-			{},
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-				import('./schema/packages.schema').Package & {
-					_id: import('mongoose').Types.ObjectId
-				}
-		> &
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-			import('./schema/packages.schema').Package & {
-				_id: import('mongoose').Types.ObjectId
-			} & Required<{
-				_id: import('mongoose').Types.ObjectId
-			}>)[]
-	>
-	create(body: PackageDto): Promise<import('./packages.module').PackagesModule>
-	update(
-		id: string,
-		data: UpdatePackageDto
-	): Promise<
-		import('mongoose').Document<
-			unknown,
-			{},
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-				import('./schema/packages.schema').Package & {
-					_id: import('mongoose').Types.ObjectId
-				}
-		> &
-			import('mongoose').Document<
-				unknown,
-				{},
-				import('./schema/packages.schema').Package
-			> &
-			import('./schema/packages.schema').Package & {
-				_id: import('mongoose').Types.ObjectId
-			} & Required<{
-				_id: import('mongoose').Types.ObjectId
-			}>
-	>
+    private packageService;
+    constructor(packageService: PackagesService);
+    findAll(): Promise<(import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    }> & import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>)[]>;
+    findBy(id: string): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    }> & import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>>;
+    findByStatus(status: PackageStatus): Promise<(import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    }> & import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>)[]>;
+    create(body: PackageDto): Promise<import("./packages.module").PackagesModule>;
+    update(id: string, data: UpdatePackageDto): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    }> & import("mongoose").Document<unknown, {}, import("./schema/packages.schema").Package> & import("./schema/packages.schema").Package & {
+        _id: import("mongoose").Types.ObjectId;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>>;
 }

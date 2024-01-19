@@ -1,3 +1,3 @@
 export declare class AddPackageDto {
-	packageId: string
+    packageId: string;
 }

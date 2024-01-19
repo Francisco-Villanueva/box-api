@@ -1,1 +1,2 @@
-export declare class PackagesModule {}
+export declare class PackagesModule {
+}

@@ -17,8 +17,6 @@ describe('PackagesService', () => {
 			weight: 5,
 			deliverDate: '2023-12-14',
 			status: 'NO ASIGNADO',
-			isShownToAdmin: true,
-			isShownToCarrier: true,
 		},
 		{
 			_id: '6571cf4ffdb95b0a615c4aee',
@@ -27,8 +25,6 @@ describe('PackagesService', () => {
 			weight: 2,
 			deliverDate: '2023-12-13',
 			status: 'PENDIENTE',
-			isShownToAdmin: true,
-			isShownToCarrier: true,
 		},
 		{
 			_id: '6571e4e9c5cfa9c54f614916',
@@ -37,8 +33,6 @@ describe('PackagesService', () => {
 			weight: 3,
 			deliverDate: '2023-12-13',
 			status: 'PENDIENTE',
-			isShownToAdmin: true,
-			isShownToCarrier: true,
 		},
 	]
 
@@ -118,8 +112,6 @@ describe('PackagesService', () => {
 				weight: 22,
 				deliverDate: '2023-12-07',
 				status: 'NO ASIGNADO',
-				isShownToAdmin: true,
-				isShownToCarrier: true,
 			}
 
 			const mockCreatedPackage = {

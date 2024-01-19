@@ -1,4 +1,4 @@
 export declare enum ROLES {
-	ADMIN = 'ADMIN',
-	CARRIER = 'CARRIER',
+    ADMIN = "ADMIN",
+    CARRIER = "CARRIER"
 }

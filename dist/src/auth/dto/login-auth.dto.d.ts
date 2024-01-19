@@ -1,5 +1,5 @@
-import { IAuthBody } from '../auth.interface'
+import { IAuthBody } from '../auth.interface';
 export declare class LoginAuthDto implements IAuthBody {
-	user: string
-	password: string
+    user: string;
+    password: string;
 }

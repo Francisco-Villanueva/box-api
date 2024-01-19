@@ -22,42 +22,19 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { HydratedDocument } from 'mongoose'
-export type PackageDocument = HydratedDocument<Package>
+import { HydratedDocument } from 'mongoose';
+export type PackageDocument = HydratedDocument<Package>;
 export declare class Package {
-	address: string
-	clientName: string
-	weight: number
-	deliverDate: string
-	status: string
-	isShownToAdmin: boolean
-	isShownToCarrier: boolean
+    address: string;
+    clientName: string;
+    weight: number;
+    deliverDate: string;
+    status: string;
+    isShownToAdmin: boolean;
+    isShownToCarrier: boolean;
 }
-export declare const PackageSchema: import('mongoose').Schema<
-	Package,
-	import('mongoose').Model<
-		Package,
-		any,
-		any,
-		any,
-		import('mongoose').Document<unknown, any, Package> &
-			Package & {
-				_id: import('mongoose').Types.ObjectId
-			},
-		any
-	>,
-	{},
-	{},
-	{},
-	{},
-	import('mongoose').DefaultSchemaOptions,
-	Package,
-	import('mongoose').Document<
-		unknown,
-		{},
-		import('mongoose').FlatRecord<Package>
-	> &
-		import('mongoose').FlatRecord<Package> & {
-			_id: import('mongoose').Types.ObjectId
-		}
->
+export declare const PackageSchema: import("mongoose").Schema<Package, import("mongoose").Model<Package, any, any, any, import("mongoose").Document<unknown, any, Package> & Package & {
+    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Package, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Package>> & import("mongoose").FlatRecord<Package> & {
+    _id: import("mongoose").Types.ObjectId;
+}>;

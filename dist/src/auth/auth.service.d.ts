@@ -24,44 +24,29 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import { UsersService } from 'src/users/users.service'
-import { UsersDocument } from 'src/users/schema/users.schema'
-import * as jwt from 'jsonwebtoken'
-import { IAuthResponse } from 'src/auth/auth.interface'
-import { UserDTO } from 'src/users/dto/user.dto'
-import { ResetPasswordDto } from './dto/resetPass-auth.dto'
-import { MailService } from '../modules/mailer/mailer.service'
-import { UpdatePasswordDto } from './dto/updatePass-auth.dto'
+import { UsersService } from 'src/users/users.service';
+import { UsersDocument } from 'src/users/schema/users.schema';
+import * as jwt from 'jsonwebtoken';
+import { IAuthResponse } from 'src/auth/auth.interface';
+import { UserDTO } from 'src/users/dto/user.dto';
+import { ResetPasswordDto } from './dto/resetPass-auth.dto';
+import { MailService } from '../modules/mailer/mailer.service';
+import { UpdatePasswordDto } from './dto/updatePass-auth.dto';
 export declare class AuthService {
-	private readonly userService
-	private readonly mailerService
-	constructor(userService: UsersService, mailerService: MailService)
-	validateUser(
-		userName: string,
-		password: string
-	): Promise<
-		import('mongoose').Document<
-			unknown,
-			{},
-			import('src/users/schema/users.schema').User
-		> &
-			import('src/users/schema/users.schema').User & {
-				_id: import('mongoose').Types.ObjectId
-			}
-	>
-	signJWT({
-		payload,
-		secret,
-	}: {
-		payload: jwt.JwtPayload
-		secret: string
-	}): string
-	generateJWT(user: UsersDocument): Promise<IAuthResponse>
-	me(token: string): Promise<string | jwt.JwtPayload>
-	register(
-		userObjectRegister: UserDTO
-	): Promise<import('../users/users.module').UsersModule>
-	resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void>
-	updatePassword(updatePasswordDto: UpdatePasswordDto): Promise<void>
-	uploadImageToS3(file: Express.Multer.File): Promise<string>
+    private readonly userService;
+    private readonly mailerService;
+    constructor(userService: UsersService, mailerService: MailService);
+    validateUser(userName: string, password: string): Promise<import("mongoose").Document<unknown, {}, import("src/users/schema/users.schema").User> & import("src/users/schema/users.schema").User & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    signJWT({ payload, secret, }: {
+        payload: jwt.JwtPayload;
+        secret: string;
+    }): string;
+    generateJWT(user: UsersDocument): Promise<IAuthResponse>;
+    me(token: string): Promise<string | jwt.JwtPayload>;
+    register(userObjectRegister: UserDTO): Promise<import("../users/users.module").UsersModule>;
+    resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void>;
+    updatePassword(updatePasswordDto: UpdatePasswordDto): Promise<void>;
+    uploadImageToS3(file: Express.Multer.File): Promise<string>;
 }

@@ -1,1 +1,1 @@
-export declare const checkEnvVariables: () => void
+export declare const checkEnvVariables: () => void;

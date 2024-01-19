@@ -1,3 +1,3 @@
 export declare class ResetPasswordDto {
-	email: string
+    email: string;
 }
