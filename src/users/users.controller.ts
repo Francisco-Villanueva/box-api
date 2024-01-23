@@ -28,6 +28,11 @@ export class UsersController {
 		private readonly pacakgesServices: PackagesService
 	) {}
 
+	@Get('/hello') // ESTO ES PARA TESTEAR QUE SE INTEGRE A EC2 CON LAS GITHUB ACTIONS
+	hello() {
+		return 'Hello users'
+	}
+
 	@ApiOperation({ description: 'Create a new user' })
 	@ApiBody({ type: UserDTO })
 	@Post()
