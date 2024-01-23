@@ -6,14 +6,20 @@ name: Node.js CI/CD
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
+
     runs-on: self-hosted
+
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    env:
+      NODE_OPTIONS: --max_old_space_size=4096
+      
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -21,7 +27,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - name: Set Node options
+      run: echo "NODE_OPTIONS=${NODE_OPTIONS}" >> $GITHUB_ENV
+    - name: Instal Dependencies
+      run: npm install
+    - name: Prettier Format
+      run: npm run format
+    - name: Build
+      run: npm run build
     - run: |
         touch .env
-        echo "${{ secrets.PROD_ENV_FILE }}"
+        echo "${{ secrets.PROD_ENV_FILE }}" > .env

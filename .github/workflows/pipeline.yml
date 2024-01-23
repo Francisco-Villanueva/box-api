@@ -22,7 +22,11 @@ jobs:
      run: npm install
    - name: Prettier Format
      run: npm run format
-   - name: Lint
-     run: npm run lint
    - name: Build
      run: npm run build
+   - name: Test
+     run: npm run test
+   - name: Enviroment vars
+     run: |
+       touch .env
+       echo "${{ secrets.PROD_ENV_FILE }}" > .env
