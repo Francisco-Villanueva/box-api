@@ -33,6 +33,9 @@ export class PackagesService {
 			returnOriginal: false,
 		})
 	}
+	async delete(_id: string) {
+		return await this.PackageModel.findOneAndDelete({ _id })
+	}
 	// ObjectId validation:
 	async validateObjectId(id: string): Promise<boolean> {
 		const isValidId = mongoose.isValidObjectId(id)
