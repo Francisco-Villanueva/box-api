@@ -110,7 +110,7 @@ export class AuthService {
 		}
 
 		const resetToken = await this.generateJWT(user)
-		await this.mailerService.sendEmail(user.email, resetToken)
+		await this.mailerService.sendEmail(user.name, user.email, resetToken)
 	}
 
 	async updatePassword(updatePasswordDto: UpdatePasswordDto) {
