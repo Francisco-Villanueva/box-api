@@ -23,7 +23,7 @@ async function bootstrap() {
 	SwaggerModule.setup('docs', app, document)
 
 	await app.listen(process.env.PORT, () => {
-		console.log(`Servidor corriendo en http://localhost:${process.env.PORT}`)
+		console.log(`Servidor corriendo en puerto ${process.env.PORT}`)
 	})
 }
 bootstrap()
