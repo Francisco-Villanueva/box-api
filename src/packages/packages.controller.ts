@@ -9,6 +9,7 @@ import {
 	HttpStatus,
 	BadRequestException,
 	NotFoundException,
+	Delete,
 } from '@nestjs/common'
 import { PackagesService } from './packages.service'
 import { PackageDto } from './dto/package.dto'
@@ -106,6 +107,26 @@ export class PackagesController {
 			}
 
 			return updatedPackage
+		} catch (error) {
+			throw error
+		}
+	}
+
+	@ApiOperation({ description: 'Delete a specific package based on their ID' })
+	@ApiParam({ name: 'id', description: 'ID of the package', type: String })
+	@Delete(':id')
+	@HttpCode(HttpStatus.OK)
+	async deleteById(@Param('id') id: string) {
+		try {
+			//TODO No llamar mongoose en los controllers, llamar a un servicio que llame a mongoose. Va a hacer falta un mock de mongoose para testear
+			const isValidId = await this.packageService.validateObjectId(id)
+			if (!isValidId)
+				throw new BadRequestException('Por favor ingresar un ID valido')
+
+			const packageById = await this.packageService.findByID(id)
+			if (!packageById) throw new NotFoundException('Paquete no encontrado')
+
+			return await this.packageService.delete(id)
 		} catch (error) {
 			throw error
 		}

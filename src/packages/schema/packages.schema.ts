@@ -21,6 +21,12 @@ export class Package {
 
 	@Prop({ required: false, default: 'NO ASIGNADO' })
 	status: string
+
+	@Prop({ required: false, default: true })
+	isShownToAdmin: boolean
+
+	@Prop({ required: false, default: true })
+	isShownToCarrier: boolean
 }
 
 export const PackageSchema = SchemaFactory.createForClass(Package)
